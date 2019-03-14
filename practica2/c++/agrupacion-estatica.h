@@ -1,11 +1,11 @@
-#ifndef AGRUPACION_ESTATICA_H
-#define AGRUPACION_ESTATICA_H
+#ifndef AGRUPACION_H
+#define AGRUPACION_H
 
 // Interfaz del TAD agrupación genérico. Pre-declaraciones:
 const int MAX = 40; //Límite tamaño de la agrupación, en esta implementación.
 
 template<typename T>
-class agrupacion_estatica {
+class agrupacion_estatica{
 	
 private: 
 	//Mantenemos aqui los mismos atributos privados, ignorando aquellos que tengan que ver
@@ -15,12 +15,10 @@ private:
 
 public:
 //	Ahora la funcion iniciar de la estructura es el constructor. 
-	agrupacion_estatica() : datos(), total(0) {  
+	agrupacion_estatica() : total(0) { 
 		//Si invocas a los constructores de los miembros privados no necesitas rellenar el código del constructor.
 	}
 
-//	TODO: La funcion anyadir ahora es el metodo anyadir. Rellénalo. Para acceder a atributos
-//	y métodos de la propia clase, deberás hacerlo a través del puntero this->
 	bool anyadir(const T& p) {
 		bool sePuede = total < MAX;
 		if (sePuede) {
@@ -80,7 +78,8 @@ public:
 	//
 		bool operator!=(const const_iterator& that) const 
 		{ 
-			return (this->i != that.i); // Comparamos los indices
+		    
+			return ((&(this->c) != &(that.c)) || (this->i != that.i)); // Comparamos los indices
 			//Devuelve true sii este iterador y el iterador "that" apuntan a sitios diferentes
 		}		
 

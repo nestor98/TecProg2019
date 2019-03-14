@@ -14,15 +14,8 @@ import java.lang.UnsupportedOperationException;
 //básico de la herencia en Java que es inevitable en este caso y sobre el que hablaremos
 //más adelante en clase de teoría.
 public class AgrupacionDinamica<T> implements Agrupacion<T> {
-	//Esta es la única forma que tiene Java de declarar valores inmutables.
-	// private static final int MAX = 40; es dinamica
 
-	//Habrás notado que en Java no hay bloques "private" y "public", sino que es una palabra clave
-	//que se pone en cada elemento (atributo o método).
-	protected Nodo<T> ptUltimo; // Puntero??
-	protected int total;
-
-	protected class Nodo<T> {
+	private class Nodo { // Por que puede ser private
 		private T dato;
 		private Nodo siguiente; // Supongo que las referencias son asi tal cual...
 
@@ -32,6 +25,15 @@ public class AgrupacionDinamica<T> implements Agrupacion<T> {
 			siguiente = siguienteN; 
 		}
 	}
+	//Esta es la única forma que tiene Java de declarar valores inmutables.
+	// private static final int MAX = 40; es dinamica
+
+	//Habrás notado que en Java no hay bloques "private" y "public", sino que es una palabra clave
+	//que se pone en cada elemento (atributo o método).
+	private Nodo ptUltimo; // Puntero??
+	private int total;
+
+
 
 	//El constructor de Java llama a los constructores de los parámetros dentro del bloque de código.
 	@SuppressWarnings("unchecked")
@@ -58,17 +60,17 @@ public class AgrupacionDinamica<T> implements Agrupacion<T> {
 
 	//Esta clase representa a un iterador sobre la agrupación. De nuevo, por el comportamiento estándar de los
 	//iteradores en Java, deberemos utilizar la herencia.
-	private class IteradorAgrupacionDinamica<T> implements Iterator<T> 
+	private class Iterador implements Iterator<T> 
 	{
 
 		//Aquí declaramos los atributos
 		// AgrupacionDinamica<T> ag; // Puede que sobre aqui
 
-		private AgrupacionDinamica<T>.Nodo<T> i;
+		private Nodo i;
 
 		//Este es el constructor del iterador.
-		private IteradorAgrupacionDinamica(AgrupacionDinamica<T> ag) {
-			// this.ag = ag;	
+		private Iterador (AgrupacionDinamica<T> ag) {
+			// this.ag = ag;
 			i = ag.ptUltimo;
 		}
 
@@ -103,6 +105,6 @@ public class AgrupacionDinamica<T> implements Agrupacion<T> {
 
 	//Este método de la estructura de datos simplemente devuelve un nuevo iterador con el que recorrerse la estructura de datos.
 	public Iterator<T> iterator() {
-		return new IteradorAgrupacionDinamica<T>(this);
+		return new Iterador(this);
 	}
 }

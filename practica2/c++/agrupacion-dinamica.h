@@ -4,10 +4,6 @@
 // Interfaz del TAD agrupación genérico. Pre-declaraciones:
 // const int MAX = 40; En memoria dinamica no tenemos limite de tamaño
 
-
-
-
-
 template<typename T>
 class agrupacion_dinamica{
 	
@@ -22,17 +18,10 @@ private:
 		Nodo* ptSiguiente;
 	public:
 		// Constructor (invoca tb al de dato). nodo siguiente por defecto es nullptr
-		Nodo(const T dato_,  Nodo* siguiente = nullptr) : dato(dato_) {
-			ptSiguiente = siguiente;
+		Nodo(const T dato_,  Nodo* siguiente = nullptr) : dato(dato_), ptSiguiente(siguiente) {
+			// ptSiguiente = siguiente;
 		}
 
-		~Nodo() { // Destructor??
-			delete ptSiguiente; // Nada seguro de esto
-		}
-
-		// const T& operator*() {
-
-		// }
 		friend class const_iterator;
 		friend class agrupacion_dinamica;
 	};
@@ -43,6 +32,16 @@ public:
 //	Ahora la funcion iniciar de la estructura es el constructor. 
 	agrupacion_dinamica() : ptUltimo(nullptr), total(0) {  
 		//Si invocas a los constructores de los miembros privados no necesitas rellenar el código del constructor.
+	}
+
+	~agrupacion_dinamica() {  
+		Nodo* actual = ptUltimo;
+		Nodo* sig;
+		while (actual != nullptr) {
+			sig = actual->ptSiguiente;
+			delete actual;
+			actual = sig;
+		}
 	}
 
 //	TODO: La funcion anyadir ahora es el metodo anyadir. Rellénalo. Para acceder a atributos
@@ -59,6 +58,7 @@ public:
 			Nodo* aux = ptUltimo->ptSiguiente;
 			delete[] ptUltimo;
 			ptUltimo = aux;
+			total--;
 		}
 		return sePuede;
 	}
@@ -109,7 +109,7 @@ public:
 	//
 		bool operator!=(const const_iterator& that) const 
 		{ 
-			return (this->i != that.i); // Comparamos los indices
+			return ((&(this->c) != &(that.c)) || (this->i != that.i)); // Comparamos los indices
 			//Devuelve true sii este iterador y el iterador "that" apuntan a sitios diferentes
 		}		
 
