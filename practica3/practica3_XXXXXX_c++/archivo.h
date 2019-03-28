@@ -4,9 +4,9 @@
 // SEPARAR EN .H Y .CPP
 #include <list>
 #include "ruta.h"
-#include "elemento.h"
+#include "fichero.h"
 
-class Archivo:public Elemento {
+class Archivo:public Fichero {
 private:
 	Ruta& ruta;
 	int tamagno;

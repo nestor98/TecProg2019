@@ -4,12 +4,12 @@
 
 #include <list>
 #include "ruta.h"
-#include "elemento.h"
+#include "fichero.h"
 
-class Directorio:public Elemento {
+class Directorio:public Fichero {
 private:
 	Ruta& ruta;
-	std::list<Elemento> 
+	std::list<Fichero> 
 public:
 	Directorio();
 };
