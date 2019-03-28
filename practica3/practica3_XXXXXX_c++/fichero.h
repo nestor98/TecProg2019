@@ -4,13 +4,19 @@
 
 #include <list>
 #include "ruta.h"
-#include "elemento.h"
+#include ".h"
 
 class Fichero {
 private:
 	Ruta& ruta;
 public:
-	Fichero(Ruta& ruta_) : ruta(ruta) ;
+	Fichero(Ruta& ruta_);
+	// Devuelve una referencia a la ruta del fichero
+	const Ruta& ruta() const;
+	// Devuelve el tamagno del fichero
+	virtual int tamagno() const;
+
+
 };
 
 

@@ -9,7 +9,7 @@
 class Directorio:public Fichero {
 private:
 	Ruta& ruta;
-	std::list<Fichero> 
+	std::list<Fichero&> ficheros;
 public:
 	Directorio();
 };
