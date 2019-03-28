@@ -6,7 +6,7 @@
 #include "ruta.h"
 #include "fichero.h"
 
-class Directorio:public Fichero {
+class Directorio : public Fichero {
 private:
 	Ruta& ruta;
 	std::list<Fichero&> ficheros;

@@ -4,7 +4,7 @@
 
 #include <list>
 #include "ruta.h"
-#include ".h"
+// #include ".h"
 
 class Fichero {
 private:
