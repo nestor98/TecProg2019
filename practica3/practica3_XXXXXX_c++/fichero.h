@@ -7,10 +7,10 @@
 // #include ".h"
 
 class Fichero {
-private:
-	Ruta& ruta;
+// private:
+// 	Ruta& ruta;
 public:
-	Fichero(Ruta& ruta_);
+	Fichero();
 	// Devuelve una referencia a la ruta del fichero
 	const Ruta& ruta() const;
 	// Devuelve el tamagno del fichero

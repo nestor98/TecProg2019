@@ -2,13 +2,13 @@
 #define __ARCHIVO__
 
 // SEPARAR EN .H Y .CPP
-
+#include <iostream>
 #include "ruta.h"
 #include "fichero.h"
 
 class Archivo : public Fichero {
 private:
-	Ruta& ruta;
+	std::string ruta;
 	int tamagno;
 public:
 	Archivo();

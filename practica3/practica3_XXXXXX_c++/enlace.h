@@ -2,14 +2,14 @@
 #define __ENLACE__
 
 // SEPARAR EN .H Y .CPP
-
+#include <iostream>
 #include "ruta.h"
 #include "fichero.h"
 
 class Enlace:public Fichero {
 private:
-	Ruta& rutaEnlace; // Donde esta el propio enlace
-	Ruta& rutaEnlazada; // A donde apunta
+	std::string rutaEnlace; // Donde esta el propio enlace
+	std::string rutaEnlazada; // A donde apunta
 public:
 	Enlace();
 	// devuelve el tamagno del enlace (0 supongo)
