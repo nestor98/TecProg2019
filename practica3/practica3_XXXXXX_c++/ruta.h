@@ -7,11 +7,9 @@
 #include "archivo.h"
 #include "enlace.h"
 
-
-
 class Ruta {
 private:
-	std::list<shared_ptr<Nodo>> ruta;
+	std::list<std::shared_ptr<Nodo>> ruta;
 public:
 	// Constructor
 	Ruta(const Directorio& raiz);

@@ -9,7 +9,7 @@
 
 class Enlace:public Nodo {
 private:
-	shared_ptr<Nodo> rutaEnlazada; // A donde apunta
+	std::shared_ptr<Nodo> rutaEnlazada; // A donde apunta
 public:
 	Enlace();
 	// devuelve el tamagno del enlace (0 supongo)

@@ -8,17 +8,14 @@
 
 class Archivo : public Nodo {
 private:
-	int tamagno;
+	int tam; // Tamagno
 public:
 	Archivo();
 	// devuelve el tamagno del arch
-	// int tamagno() const;
+	int tamagno() const override;
 
 	// Altera el tam. del archivo a <nuevoT>. Devuelve true sii ha sido posible?
 	bool modificarTamagno(const int nuevoT);
 };
-
-
-
 
 #endif

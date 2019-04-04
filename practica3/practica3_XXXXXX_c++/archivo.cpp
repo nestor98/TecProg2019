@@ -6,7 +6,7 @@ Archivo::Archivo() {
     
 }
 
-int Archivo::tamagno() const override {
+int Archivo::tamagno() const {
     
 }
 
