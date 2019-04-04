@@ -26,6 +26,13 @@ void Ruta::cd(const std::string path) {
     
 }
 
+
+std::shared_ptr<Nodo> Ruta::buscarElemento (const std::string elemento) const {
+
+	
+}
+
+
 void Ruta::stat(const std::string element) const {
     
 }
