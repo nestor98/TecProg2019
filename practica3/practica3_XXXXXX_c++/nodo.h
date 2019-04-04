@@ -13,7 +13,7 @@ private:
 public:
 	// Nodo();
 
-	// Devuelve el nombre del nodo
+
 	string nombre() const {
 		return nombre;
 	}
@@ -27,6 +27,11 @@ public:
 	virtual int tamagno() const = 0;
 
 };
+
+// Devuelve el nombre del nodo
+ostream& operator<< (ostream& os, const Nodo& n) {
+	return os << n.nombre;
+}
 
 
 
