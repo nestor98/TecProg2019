@@ -3,8 +3,14 @@
 #include "ruta.h"
 #include "nodo.h"
 
-Directorio::Directorio() {
-    
+Directorio::Directorio();
+
+
+void Directorio::ls(){
+	for element:nodos{
+		cout<< element<< "  ";
+	}
+	cout<<endl;
 }
 
 

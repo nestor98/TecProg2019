@@ -12,14 +12,13 @@ Ruta::Ruta(const Directorio& raiz) : ruta(raiz) {
 
 std::string Ruta::pwd() const {
     for(element:ruta){
-    	cout <<"/"<< element.nombre();
+    	cout <<"/"<< element;
     }
     cout<<end;
 }
 
 void Ruta::ls() const {
-	
-
+	ruta.bach().ls();
 }
 
 void Ruta::cd(const std::string path) {
