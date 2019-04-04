@@ -7,4 +7,10 @@ Directorio::Directorio() {
     
 }
 
+void Directorio::ls(){
+	for element:nodos{
+		cout<< element<< "  ";
+	}
+	cout<<endl;
+}
 

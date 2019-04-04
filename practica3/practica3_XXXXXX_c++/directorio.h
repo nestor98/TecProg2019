@@ -12,6 +12,7 @@ private:
 	std::list<std::shared_ptr<Nodo>> nodos;
 public:
 	Directorio();
+	void ls();
 };
 
 
