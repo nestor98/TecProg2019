@@ -7,10 +7,15 @@ Directorio::Directorio() {
     
 }
 
+std::list<std::shared_ptr<Nodo>> Directorio::listar() const {
+	return nodos;
+}
+
+
 void Directorio::ls(){
-	for element:nodos{
-		cout<< element<< "  ";
+	for (ptNodo : this.listar()) {
+		cout << *ptNodo << "  ";
 	}
-	cout<<endl;
+	cout << endl;
 }
 

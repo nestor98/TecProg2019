@@ -18,7 +18,7 @@ std::string Ruta::pwd() const {
 }
 
 void Ruta::ls() const {
-	ruta.back()->ls; // ls de directorio
+	ruta.back()->ls(); // ls de directorio
 }
 
 void Ruta::cd(const std::string path) {
@@ -27,7 +27,7 @@ void Ruta::cd(const std::string path) {
 
 // Busca <elemento> en la ruta. Si no lo encuentra lanza la excepcion
 std::shared_ptr<Nodo> Ruta::buscarElemento (const std::string elemento) const throw(noEncontrado) {
-
+	
 }
 
 void Ruta::stat(const std::string element) const {
