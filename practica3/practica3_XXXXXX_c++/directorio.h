@@ -11,9 +11,9 @@ class Directorio : public Nodo {
 private:
 	std::list<std::shared_ptr<Nodo>> nodos;
 public:
-	Directorio();
+	Directorio(const std::string );
 	void ls() const;
-	std::list<std::shared_ptr<Nodo>> listar() const
+	std::list<std::shared_ptr<Nodo>> listar() const;
 };
 
 

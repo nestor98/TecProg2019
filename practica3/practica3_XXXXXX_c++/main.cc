@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "ruta.h"
+#include "excepcion_arbol_ficheros.h"
 
 using namespace std;
 

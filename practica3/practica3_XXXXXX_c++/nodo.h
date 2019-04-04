@@ -11,7 +11,7 @@ class Nodo {
 private:
 	std::string nom;
 public:
-	// Nodo();
+	Nodo(const std::string nombre) : nom(nombre) {}
 
 
 	std::string nombre() const {
@@ -26,7 +26,7 @@ public:
 
 
 	// Devuelve el tamagno del fichero
-	virtual int tamagno() const = 0;
+	virtual int tamagno() const {};
 
 
 

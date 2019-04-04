@@ -7,8 +7,8 @@ Directorio::Directorio() {
     
 }
 
-std::list<std::shared_ptr<Nodo>> Directorio::listar() const {
-	return nodos;
+std::shared_ptr<std::list<std::shared_ptr<Nodo>>> Directorio::listar() const {
+	return std::shared_ptr<std::list<std::shared_ptr<Nodo>>>(nodos);
 }
 
 
