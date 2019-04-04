@@ -3,9 +3,9 @@
 #include "ruta.h"
 #include "nodo.h"
 
-Directorio::Directorio() {
-    
-}
+
+Directorio::Directorio(const std::string nombre) : Nodo(nombre) {}
+
 
 std::shared_ptr<std::list<std::shared_ptr<Nodo>>> Directorio::listar() const {
 	return std::shared_ptr<std::list<std::shared_ptr<Nodo>>>(nodos);
