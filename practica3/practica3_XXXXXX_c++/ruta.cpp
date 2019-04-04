@@ -24,10 +24,15 @@ void Ruta::ls() const {
 // Busca <elemento> en la ruta. Si no lo encuentra lanza la excepcion
 std::shared_ptr<Nodo> Ruta::buscarElemento (const std::string elemento) const throw(noEncontrado) {
 	bool encontrado = false;
-	for (direc : ruta.back().listar()) {
-		direc.
+	std::shared_ptr<Nodo> buscado;
+	for (auto nodo : ruta.back().listar()) {
+		if (nodo.nombre() == elemento) {
+			encontrado = true;
+			buscado = nodo;
+			break;
+		}
 	}
-
+	
 
 
 
