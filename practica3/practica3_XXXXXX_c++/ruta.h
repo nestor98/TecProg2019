@@ -10,7 +10,7 @@
 
 class Ruta {
 private:
-	Directorio& ruta;
+	std::list<Nodo*> ruta;
 public:
 	// Constructor
 	Ruta(const Directorio& raiz);

@@ -5,7 +5,7 @@
 #include "enlace.h"
 
 Ruta::Ruta(const Directorio& raiz) {
-    
+    ruta = raiz;
 }
 
 std::string Ruta::pwd() const {

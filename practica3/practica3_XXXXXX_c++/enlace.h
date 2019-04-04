@@ -4,9 +4,9 @@
 // SEPARAR EN .H Y .CPP
 #include <iostream>
 #include "ruta.h"
-#include "fichero.h"
+#include "nodo.h"
 
-class Enlace:public Fichero {
+class Enlace:public Nodo {
 private:
 	std::string rutaEnlace; // Donde esta el propio enlace
 	std::string rutaEnlazada; // A donde apunta

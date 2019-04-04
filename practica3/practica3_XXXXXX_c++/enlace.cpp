@@ -1,6 +1,6 @@
 #include "enlace.h"
 #include "ruta.h"
-#include "fichero.h"
+#include "nodo.h"
 
 Enlace::Enlace() {
     

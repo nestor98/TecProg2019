@@ -4,9 +4,9 @@
 // SEPARAR EN .H Y .CPP
 #include <iostream>
 #include "ruta.h"
-#include "fichero.h"
+#include "nodo.h"
 
-class Archivo : public Fichero {
+class Archivo : public Nodo {
 private:
 	std::string ruta;
 	int tamagno;

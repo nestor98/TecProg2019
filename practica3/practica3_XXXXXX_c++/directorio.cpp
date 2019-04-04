@@ -1,7 +1,7 @@
 #include "directorio.h"
 #include <list>
 #include "ruta.h"
-#include "fichero.h"
+#include "nodo.h"
 
 Directorio::Directorio() {
     

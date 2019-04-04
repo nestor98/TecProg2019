@@ -1,6 +1,6 @@
 #include "archivo.h"
 #include "ruta.h"
-#include "fichero.h"
+#include "nodo.h"
 
 Archivo::Archivo() {
     
