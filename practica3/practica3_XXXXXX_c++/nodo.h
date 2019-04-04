@@ -2,7 +2,7 @@
 #define __NODO__
 
 #include <iostream>
-#include <memory>
+
 #include <list>
 #include "ruta.h"
 // #include ".h"

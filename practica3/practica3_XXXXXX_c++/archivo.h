@@ -8,7 +8,6 @@
 
 class Archivo : public Nodo {
 private:
-	std::string ruta;
 	int tamagno;
 public:
 	Archivo();

@@ -1,5 +1,6 @@
 #include "ruta.h"
 #include <iostream>
+#include <memory>
 #include "directorio.h"
 #include "archivo.h"
 #include "enlace.h"

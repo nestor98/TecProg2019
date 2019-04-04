@@ -1,6 +1,7 @@
 #ifndef __RUTA__
 #define __RUTA__
 
+#include <memory> // Shared ptrs
 #include <iostream>
 #include "directorio.h"
 #include "archivo.h"
@@ -10,7 +11,7 @@
 
 class Ruta {
 private:
-	std::list<Nodo*> ruta;
+	std::list<shared_ptr<Nodo>> ruta;
 public:
 	// Constructor
 	Ruta(const Directorio& raiz);

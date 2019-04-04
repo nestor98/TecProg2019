@@ -2,14 +2,14 @@
 #define __DIRECTORIO__
 
 #include <iostream>
+#include <memory>
 #include <list>
 #include "ruta.h"
 #include "nodo.h"
 
 class Directorio : public Nodo {
 private:
-	std::string ruta;
-	std::list<Nodo*> nodos;
+	std::list<shared_ptr<Nodo>> nodos;
 public:
 	Directorio();
 };

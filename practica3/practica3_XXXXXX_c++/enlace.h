@@ -2,14 +2,14 @@
 #define __ENLACE__
 
 // SEPARAR EN .H Y .CPP
+#include <memory>
 #include <iostream>
 #include "ruta.h"
 #include "nodo.h"
 
 class Enlace:public Nodo {
 private:
-	std::string rutaEnlace; // Donde esta el propio enlace
-	std::string rutaEnlazada; // A donde apunta
+	shared_ptr<Nodo> rutaEnlazada; // A donde apunta
 public:
 	Enlace();
 	// devuelve el tamagno del enlace (0 supongo)
