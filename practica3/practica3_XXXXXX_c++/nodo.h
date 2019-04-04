@@ -9,30 +9,34 @@
 
 class Nodo {
 private:
-	std::string nombre;
+	std::string nom;
 public:
 	// Nodo();
 
 
-	string nombre() const {
-		return nombre;
+	std::string nombre() const {
+		return nom;
 	}
 
 	// Cambia el nombre del nodo
-	string renombrar(const std::string nuevoNom) const {
-		nombre = nuevoNom;
+	std::string renombrar(const std::string nuevoNom) {
+		nom = nuevoNom;
 	}
+
+
 
 	// Devuelve el tamagno del fichero
 	virtual int tamagno() const = 0;
 
+
+
 };
 
-// Devuelve el nombre del nodo
-ostream& operator<< (ostream& os, const Nodo& n) {
-	return os << n.nombre;
-}
 
+// Devuelve el nombre del nodo
+std::ostream& operator<< (std::ostream& os, const Nodo& n) {
+	return os << n.nombre();
+}
 
 
 

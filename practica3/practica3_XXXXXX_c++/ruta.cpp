@@ -6,7 +6,7 @@
 #include "archivo.h"
 #include "enlace.h"
 
-Ruta::Ruta(const Directorio& raiz) {
+Ruta::Ruta(const Directorio& raiz) : ruta(raiz) {
     ruta.push_front(raiz);
 }
 

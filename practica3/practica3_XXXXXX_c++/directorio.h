@@ -9,7 +9,7 @@
 
 class Directorio : public Nodo {
 private:
-	std::list<shared_ptr<Nodo>> nodos;
+	std::list<std::shared_ptr<Nodo>> nodos;
 public:
 	Directorio();
 };
