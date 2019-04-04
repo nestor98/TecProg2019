@@ -12,26 +12,23 @@ Ruta::Ruta(const Directorio& raiz) : ruta(raiz) {
 
 std::string Ruta::pwd() const {
     for(element:ruta){
-    	cout <<"/"<< element.nombre();
+    	cout <<"/"<< element;
     }
     cout<<end;
 }
 
 void Ruta::ls() const {
-	
-
+	ruta.back()->ls; // ls de directorio
 }
 
 void Ruta::cd(const std::string path) {
     
 }
 
+// Busca <elemento> en la ruta. Si no lo encuentra lanza la excepcion
+std::shared_ptr<Nodo> Ruta::buscarElemento (const std::string elemento) const throw(noEncontrado) {
 
-std::shared_ptr<Nodo> Ruta::buscarElemento (const std::string elemento) const {
-
-	
 }
-
 
 void Ruta::stat(const std::string element) const {
     
