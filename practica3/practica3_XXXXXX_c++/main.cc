@@ -14,7 +14,8 @@ int main()
 {
 	Directorio raiz("");
 	Ruta ruta(raiz);
-
+	ruta.pwd();
+	/*
 	for (bool done=false; !done; )
 	{
 		string         line,arg;
@@ -86,6 +87,7 @@ int main()
 		}
 	}
 	cout << endl;
+	*/
 
 	return 0;
 }
