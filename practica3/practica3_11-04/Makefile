@@ -1,5 +1,5 @@
 PROG=main
-SRCS=main.cc
+SRCS=main.cc directorio.cc ruta.cc archivo.cc enlace.cc
 
 CC=g++ -std=c++11
 #CC=clang++ -std=c++11
@@ -10,7 +10,7 @@ OBJS=$(SRCS:.cc=.o)
 
 all: $(PROG)
 
-$(PROG): $(OBJS)
+$(PROG): $(OBJS) nodo.h
 	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.cc

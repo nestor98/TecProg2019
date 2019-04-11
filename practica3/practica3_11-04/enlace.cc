@@ -1,5 +1,4 @@
 #include "enlace.h"
-#include "ruta.h"
 #include "nodo.h"
 
 Enlace::Enlace() {

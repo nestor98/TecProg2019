@@ -6,14 +6,15 @@
 #include "archivo.h"
 #include "enlace.h"
 
+using namespace std;
 Ruta::Ruta(const Directorio& raiz) {
-	std::shared_ptr<Directorio> p (raiz);
+	std::shared_ptr<Directorio> p = make_shared<Directorio>(raiz);
     ruta.push_front(p);
 }
 
 std::string Ruta::pwd() const {
 	std::string s;
-    for(element:ruta){
+    for(auto element : ruta){
     	s+="/" + element->nombre();
     }
     return s;
@@ -27,21 +28,18 @@ void Ruta::ls() const {
 std::shared_ptr<Nodo> Ruta::buscarElemento (const std::string elemento) const throw(noEncontrado) {
 	bool encontrado = false;
 	std::shared_ptr<Nodo> buscado;
-	for (auto nodo : ruta.back().listar()) {
-		if (nodo.nombre() == elemento) {
-			encontrado = true;
-			buscado = nodo;
-			break;
-		}
-	}
-	
-
-
-
+	// for (auto nodo : ruta.back().listar()) {
+	// 	if (nodo.nombre() == elemento) {
+	// 		encontrado = true;
+	// 		buscado = nodo;
+	// 		break;
+	// 	}
+	// }
 	if (!encontrado) {
 		throw noEncontrado();
 	}
 }
+
 
 void Ruta::cd(const std::string path) {
 

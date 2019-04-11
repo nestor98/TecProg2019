@@ -4,14 +4,19 @@
 #include <sstream>
 
 #include "ruta.h"
+#include "directorio.h"
+
+#include "excepcion_arbol_ficheros.h"
 
 using namespace std;
 
 int main()
 {
-	Directorio raiz("");
+	string a = "";
+	Directorio raiz(a);
 	Ruta ruta(raiz);
-
+	ruta.pwd();
+	/*
 	for (bool done=false; !done; )
 	{
 		string         line,arg;
@@ -83,6 +88,7 @@ int main()
 		}
 	}
 	cout << endl;
+	*/
 
 	return 0;
 }

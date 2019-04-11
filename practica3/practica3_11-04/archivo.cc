@@ -1,5 +1,4 @@
 #include "archivo.h"
-#include "ruta.h"
 #include "nodo.h"
 
 Archivo::Archivo() {
