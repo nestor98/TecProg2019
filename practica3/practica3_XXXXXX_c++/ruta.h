@@ -46,7 +46,7 @@ public:
 
 	// Crea un directorio dentro de la ruta actual. No se le puede
 	// pasar como parámetro una ruta completa.
-	void mkdir(const std::string dir) const;
+	void mkdir(const std::string dir) ;
 
 	// Crea un enlace simbólico de nombre “dest” a que
 	// enlaza el elemento identificado mediante el nombre “orig”. “dest” no puede contener

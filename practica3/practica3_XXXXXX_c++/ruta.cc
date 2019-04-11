@@ -42,33 +42,29 @@ std::shared_ptr<Nodo> Ruta::buscarElemento (const std::string elemento) const th
 
 
 void Ruta::cd(const std::string path) {
-
-	switch(path){
-		case ".":
-			//No hace nada.
-			break;
-		case "..":
-			if(ruta.size() > 1){
-				ruta.pop_back();
-			}
-			else{
-				//Lazar excepción
-			}
-			break;
-		case "/":
-			ruta.erase(ruta.begin(),ruta.end());
-			//Esto lo tengo que revisar. Hay que mover una posicion el primero y el ultimo.
-			//Cuando compile lo probaré.
-			break;
-		default: 
-			size_t f= path.find("/");
-			ruta.back()->buscarElto(path.substr(0,f))
-			ruta.push_back(path.substr(0,f));
-			if(f!=-1){
-				ruta.cd(path.substr(f+1,path.size()));
-			}
-			break;
+	if (path == ".."){
+		if(ruta.size() > 1){
+			ruta.pop_back();
+		}
+		else{
+			//Lazar excepción
+		}
 	}
+	else if (path == "/") {
+		ruta.erase(ruta.begin(),ruta.end());
+		//Esto lo tengo que revisar. Hay que mover una posicion el primero y el ultimo.
+		//Cuando compile lo probaré.
+
+	}
+	else if (path!= ".") {
+		size_t f= path.find("/");
+		std::shared_ptr<Nodo> dest = ruta.back()->buscarElto(path.substr(0,f));
+		ruta.push_back(dest);
+		if(f!=-1){
+			this->cd(path.substr(f+1,path.size()));
+		}
+	}
+	
     
 }
 
@@ -81,10 +77,9 @@ void Ruta::vim(const std::string file, const int size) const {
     
 }
 
-void Ruta::mkdir(const std::string dir) const {
-    Directorio d(dir);
-    //NO es tan facil. Estoy trabajando con punteros.
-    ruta.push_back(d);
+void Ruta::mkdir(const std::string dir)  {
+	std::shared_ptr<Directorio> p(new Directorio(dir));
+    ruta.push_back(p);
 }
 
 void Ruta::ln(const std::string orig, const std::string dest) const {
