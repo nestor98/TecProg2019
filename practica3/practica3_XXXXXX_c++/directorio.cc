@@ -14,6 +14,18 @@ void Directorio::ls() const {
 	cout << endl;
 }
 
+int Directorio::tamagno(){
+	int tam=0;
+	for (auto nodo : nodos){
+		tam+= nodo->tamagno();
+	}
+}
+
+
+
+
+
+
 // Devuelve el indice del elemento en la lista de hijos del directorio
 shared_ptr<Nodo> Directorio::buscarElto(const string elemento) const throw(noEncontrado) {
 	bool encontrado = false;

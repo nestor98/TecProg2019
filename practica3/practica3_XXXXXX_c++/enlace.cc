@@ -1,12 +1,11 @@
 #include "enlace.h"
 #include "nodo.h"
 
-Enlace::Enlace() {
+Enlace::Enlace(const string nombre) : Nodo(nombre) {}
     
-}
 
-int Enlace::tamagno() const override {
-    
+int Enlace::tamagno()  {
+    return rutaEnlazada->tamagno();
 }
 
 bool Enlace::modificarTamagno(const int nuevoT) {

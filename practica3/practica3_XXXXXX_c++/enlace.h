@@ -10,9 +10,9 @@ class Enlace:public Nodo {
 private:
 	std::shared_ptr<Nodo> rutaEnlazada; // A donde apunta
 public:
-	Enlace();
+	Enlace(const string nombre);
 	// devuelve el tamagno del enlace (0 supongo)
-	int tamagno() const override;
+	int tamagno() override;
 
 	// Altera el tam. del archivo a <nuevoT>. Devuelve true sii ha sido posible?
 	bool modificarTamagno(const int nuevoT);

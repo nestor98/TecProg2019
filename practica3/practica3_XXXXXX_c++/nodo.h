@@ -23,7 +23,7 @@ public:
 	}
 
 	// Devuelve el tamagno del fichero
-	virtual int tamagno() const {}
+	virtual int tamagno()  {}
 
 	virtual void ls() const {}
 
