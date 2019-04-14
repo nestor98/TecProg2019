@@ -1,0 +1,7 @@
+mkdir home
+cd home
+mkdir jose
+cd jose
+mkdir tecprog
+cd ..
+cd ..

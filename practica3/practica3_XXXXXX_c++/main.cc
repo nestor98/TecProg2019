@@ -14,8 +14,12 @@ int main()
 {
 	Directorio raiz("");
 	Ruta ruta(raiz);
-	cout<< ruta.pwd() <<endl;
 	/*
+	cout<< ruta.pwd() <<endl;
+	ruta.mkdir("JOSE");
+	ruta.cd("JOSE");
+	cout<< ruta.pwd() <<endl;
+	*/
 	for (bool done=false; !done; )
 	{
 		string         line,arg;
@@ -87,7 +91,6 @@ int main()
 		}
 	}
 	cout << endl;
-	*/
 
 	return 0;
 }

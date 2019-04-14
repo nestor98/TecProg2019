@@ -21,7 +21,10 @@ int Directorio::tamagno(){
 	}
 }
 
-
+void Directorio::agndir(const shared_ptr<Nodo> p){
+	nodos.push_back(p);
+	//METER UNA EXCEPCION. EN CASO DE QUE EXISTA UN DIRECTORIO DE NOMBRE DIR.
+}
 
 
 //

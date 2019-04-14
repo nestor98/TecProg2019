@@ -7,12 +7,12 @@
 #include <list>
 // #include ".h"
 
-class ExcepcionArbolFicheros {
+class arbol_ficheros_error {
 private:
 	std::string nom;
 public:
-	ExcepcionArbolFicheros(const std::string nombre) : nom(nombre)  {}
-	virtual ~ExcepcionArbolFicheros() {}
+	arbol_ficheros_error(const std::string nombre) : nom(nombre)  {}
+	virtual ~arbol_ficheros_error() {}
 	virtual const char* what() const{};
 
 };
@@ -20,10 +20,10 @@ public:
 
 
 
-class noEncontrado : public ExcepcionArbolFicheros {
+class noEncontrado : public arbol_ficheros_error {
 
 public:
-	noEncontrado() : ExcepcionArbolFicheros("No encontrado") {}
+	noEncontrado() : arbol_ficheros_error("No encontrado") {}
 	~noEncontrado(){}
 	const char* what() const override {
 		return ""; // Esta en principio no saca nada por pantalla
@@ -32,10 +32,10 @@ public:
 };
 
 
-class rutaCdInvalida : public ExcepcionArbolFicheros {
+class rutaCdInvalida : public arbol_ficheros_error {
 
 public:
-	rutaCdInvalida() : ExcepcionArbolFicheros("Ruta cd invalida") {}
+	rutaCdInvalida() : arbol_ficheros_error("Ruta cd invalida") {}
 	~rutaCdInvalida(){}
 	const char* what() const override {
 		return "No se puede cambiar de directorio."; // Esta en principio no saca nada por pantalla
@@ -46,7 +46,7 @@ public:
 
 
 /*
-class arbol_ficheros_error : public ExcepcionArbolFicheros {
+class arbol_ficheros_error : public arbol_ficheros_error {
 
 public:
 	// arbol_ficheros_error() {}
@@ -58,7 +58,7 @@ public:
 };
 */
 
-// class out_of_range : public ExcepcionArbolFicheros {
+// class out_of_range : public arbol_ficheros_error {
 
 // public:
 // 	out_of_range() {}

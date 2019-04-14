@@ -25,9 +25,9 @@ void Ruta::ls() const {
 }
 
 // Busca <elemento> en la ruta. Si no lo encuentra lanza la excepcion
-shared_ptr<Nodo> Ruta::buscarElemento (const string elemento) const throw(noEncontrado) {
+shared_ptr<Directorio> Ruta::buscarElemento (const string elemento) const throw(noEncontrado) {
 	bool encontrado = false;
-	shared_ptr<Nodo> buscado;
+	shared_ptr<Directorio> buscado;
 	// for (auto nodo : ruta.back().listar()) {
 	// 	if (nodo.nombre() == elemento) {
 	// 		encontrado = true;
@@ -56,17 +56,36 @@ void Ruta::cd(const string path) {
 		}
 	}
 	else if (path == "/") {
-		ruta.erase(ruta.begin(),ruta.end());
-		//Esto lo tengo que revisar. Hay que mover una posicion el primero y el ultimo.
-		//Cuando compile lo probaré.
-
+		shared_ptr<Directorio> aux= ruta.front(); 
+		ruta.clear();
+    	ruta.push_front(aux);
 	}
 	else if (path!= ".") {
-		size_t f= path.find("/");
-		shared_ptr<Nodo> dest = ruta.back()->buscarElto(path.substr(0,f));
-		ruta.push_back(dest);
-		if(f!=-1){
-			this->cd(path.substr(f+1,path.size()));
+		//Esto no es lo más eficiente. Seguro que se puede mejorar.
+		if(path.substr(0,1)=="/"){
+			list<shared_ptr<Directorio>> rutaAux= ruta;
+			this->cd("/"); //Recursivo
+			this->cd(path.substr(1,path.size()-1));
+			//vacia todo.
+			//comprueba si existen todo los directorios.
+			//Llenalo con los componentes de la cadena.
+			//Si salta una excepcion vuelve a cargar ruta con lo que había antes.
+		}
+		else{
+			string aux=path;
+			while(aux!=""){
+				cout<<"Entra como:"<<aux<<endl;
+				size_t f= path.find("/");
+				shared_ptr<Directorio> dest = ruta.back()->buscarElto(aux.substr(0,f));
+				ruta.push_back(dest);
+				if(f!=-1){
+					aux=aux.substr(f+1);
+				}
+				else{
+					aux="";
+				}
+				cout<<"Sale como:"<<aux<<endl;
+			}
 		}
 	}
 	
@@ -84,7 +103,9 @@ void Ruta::vim(const string file, const int size) const {
 
 void Ruta::mkdir(const string dir)  {
 	shared_ptr<Directorio> p(new Directorio(dir));
-    ruta.push_back(p);
+    ruta.back()->agndir(p);
+    cout<<"SE HA CREADO"<<endl;
+    cout<<ruta.back()->nombre()<<endl;
 }
 
 void Ruta::ln(const string orig, const string dest) const {

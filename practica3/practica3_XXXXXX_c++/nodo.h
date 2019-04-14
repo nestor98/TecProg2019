@@ -27,6 +27,8 @@ public:
 
 	virtual void ls() const {}
 
+	virtual void agndir(const shared_ptr<Nodo> p);
+
 	virtual shared_ptr<Nodo> buscarElto(const string elemento) const {}
 
 };
