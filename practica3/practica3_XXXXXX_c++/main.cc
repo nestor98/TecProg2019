@@ -14,7 +14,7 @@ int main()
 {
 	Directorio raiz("");
 	Ruta ruta(raiz);
-	ruta.pwd();
+	cout<< ruta.pwd() <<endl;
 	/*
 	for (bool done=false; !done; )
 	{

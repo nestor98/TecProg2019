@@ -9,7 +9,7 @@ Directorio::Directorio(const string nombre) : Nodo(nombre) {}
 
 void Directorio::ls() const {
 	for (auto ptNodo : nodos) {
-		cout << *ptNodo << "  ";
+		cout << ptNodo->nombre() << "  ";
 	}
 	cout << endl;
 }
@@ -24,21 +24,26 @@ int Directorio::tamagno(){
 
 
 
-
+//
 
 // Devuelve el indice del elemento en la lista de hijos del directorio
-shared_ptr<Nodo> Directorio::buscarElto(const string elemento) const throw(noEncontrado) {
-	bool encontrado = false;
-	shared_ptr<Nodo> buscado = nullptr;
-	for (auto nodo : nodos) {
-		if (nodo->nombre() == elemento) {
-			encontrado = true;
-			buscado = nodo;
-			break;
+shared_ptr<Nodo> Directorio::buscarElto(const string elemento) const throw(noEncontrado){
+	try{
+		bool encontrado = false;
+		shared_ptr<Nodo> buscado = nullptr;
+		for (auto nodo : nodos) {
+			if (nodo->nombre() == elemento) {
+				encontrado = true;
+				buscado = nodo;
+				break;
+			}
 		}
+		if (!encontrado) {
+			throw noEncontrado();
+		}
+		return buscado;
 	}
-	if (!encontrado) {
-		throw noEncontrado();
+	catch (noEncontrado& e){
+		cout<< e.what();
 	}
-	return buscado;
 }

@@ -19,6 +19,7 @@ public:
 
 	void ls() const override;
 
+	//
 	shared_ptr<Nodo> buscarElto(const string elemento) const throw(noEncontrado) override;
 };
 
