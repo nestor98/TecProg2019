@@ -30,34 +30,7 @@ void Ruta::ls() const {
 // Busca <elemento> en la ruta. Si no lo encuentra lanza la excepcion
 /*
 shared_ptr<Nodo> Ruta::buscarElemento (const string elemento) const throw(noEncontrado) {
-	string aux=elemento;
-	list<shared_ptr<Nodo>>::iterator it=ruta.end();
-	while(aux!=""){
-		size_t f= aux.find("/");
-		string pri=aux.substr(0,f);
-		if(f!=-1){
-			aux=aux.substr(f+1);
-		}
-		else{
-			aux="";
-		}
-		if (pri == ".."){
-				if(it!=ruta.begin()){
-					it= --it;
-				}
-				else{
-					//Lanza algun tipo de excepcion
-					//throw rutaCdInvalida();
-				}
-		}
-		else if (pri == "/") {
-			it=ruta.begin();
-		}
-		else if (pri!= ".") {
-			it = it->buscarElto(pri);
-		}
-	}
-	return it;
+	
 }
 */
 
@@ -112,15 +85,7 @@ void Ruta::cd(const string path) {
 
 
 void Ruta::stat(const string element) const {
-    /*
-    try{
-    	shared_ptr<Nodo> p= buscarElemento(element);
-    	cout<<p->tamagno()<<endl;
-    }
-    catch(noEncontrado& e){
-    	cout<< e.what();
-    }
-    */
+    
 }
 
 void Ruta::vim(const string file, const int size) const {
