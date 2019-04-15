@@ -14,9 +14,12 @@ Ruta::Ruta(const Directorio& raiz) {
 
 string Ruta::pwd() const {
 	string s;
-    for(auto element : ruta){
-    	s+="/" + element->nombre();
-    }
+	for(auto element : ruta){
+		   s+=element->nombre()+"/" ;
+	}
+	if(ruta.size()>1){
+		s.pop_back();
+	}
     return s;
 }
 
@@ -25,21 +28,38 @@ void Ruta::ls() const {
 }
 
 // Busca <elemento> en la ruta. Si no lo encuentra lanza la excepcion
-shared_ptr<Directorio> Ruta::buscarElemento (const string elemento) const throw(noEncontrado) {
-	bool encontrado = false;
-	shared_ptr<Directorio> buscado;
-	// for (auto nodo : ruta.back().listar()) {
-	// 	if (nodo.nombre() == elemento) {
-	// 		encontrado = true;
-	// 		buscado = nodo;
-	// 		break;
-	// 	}
-	// }
-	if (!encontrado) {
-		throw noEncontrado();
+/*
+shared_ptr<Nodo> Ruta::buscarElemento (const string elemento) const throw(noEncontrado) {
+	string aux=elemento;
+	list<shared_ptr<Nodo>>::iterator it=ruta.end();
+	while(aux!=""){
+		size_t f= aux.find("/");
+		string pri=aux.substr(0,f);
+		if(f!=-1){
+			aux=aux.substr(f+1);
+		}
+		else{
+			aux="";
+		}
+		if (pri == ".."){
+				if(it!=ruta.begin()){
+					it= --it;
+				}
+				else{
+					//Lanza algun tipo de excepcion
+					//throw rutaCdInvalida();
+				}
+		}
+		else if (pri == "/") {
+			it=ruta.begin();
+		}
+		else if (pri!= ".") {
+			it = it->buscarElto(pri);
+		}
 	}
+	return it;
 }
-
+*/
 
 void Ruta::cd(const string path) {
 	list<shared_ptr<Directorio>> copy= ruta;
@@ -47,7 +67,15 @@ void Ruta::cd(const string path) {
 		string aux=path;
 		while(aux!=""){
 			size_t f= aux.find("/");
-			string pri=aux.substr(0,f);
+			string pri;
+			if(f==0){
+				pri="/";
+			}
+			else{
+				pri=aux.substr(0,f);
+			}
+			
+			cout<<"Esto es pri "<<pri<<endl;
 			if(f!=-1){
 				aux=aux.substr(f+1);
 			}
@@ -62,18 +90,21 @@ void Ruta::cd(const string path) {
 					throw rutaCdInvalida();
 				}
 			}
-			else if (path == "/") {
+			else if (pri == "/") {
 				shared_ptr<Directorio> aux= ruta.front(); 
 				ruta.clear();
 		    	ruta.push_front(aux);
 			}
-			else if (path!= ".") {
-				shared_ptr<Directorio> dest = ruta.back()->buscarElto(pri);
-				ruta.push_back(dest);
+			else if (pri!= ".") {
+				shared_ptr<Nodo> dest = ruta.back()->buscarElto(pri);
+				shared_ptr<Directorio> destDir= dynamic_pointer_cast<Directorio>(dest);
+				if(destDir!=nullptr)
+					ruta.push_back(destDir);
 			}
 		}
 	}
 	catch(noEncontrado& e){
+		cout<<path<<" no existe idiota."<<endl;
 		cout<< e.what();
 		ruta=copy;
 	}
@@ -81,7 +112,15 @@ void Ruta::cd(const string path) {
 
 
 void Ruta::stat(const string element) const {
-    
+    /*
+    try{
+    	shared_ptr<Nodo> p= buscarElemento(element);
+    	cout<<p->tamagno()<<endl;
+    }
+    catch(noEncontrado& e){
+    	cout<< e.what();
+    }
+    */
 }
 
 void Ruta::vim(const string file, const int size) const {
@@ -89,10 +128,14 @@ void Ruta::vim(const string file, const int size) const {
 }
 
 void Ruta::mkdir(const string dir)  {
-	shared_ptr<Directorio> p(new Directorio(dir));
-    ruta.back()->agndir(p);
-    cout<<"SE HA CREADO"<<endl;
-    cout<<ruta.back()->nombre()<<endl;
+	try{
+		shared_ptr<Nodo> foo = ruta.back()->buscarElto(dir);
+		cout<<"Ya existe un elemento de nombre "<<dir<<endl;
+	}
+	catch(noEncontrado& e){
+		shared_ptr<Directorio> p(new Directorio(dir));
+    	ruta.back()->agndir(p);
+	}
 }
 
 void Ruta::ln(const string orig, const string dest) const {

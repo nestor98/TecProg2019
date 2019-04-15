@@ -11,7 +11,7 @@ class Ruta {
 private:
 	std::list<std::shared_ptr<Directorio>> ruta;
 
-	std::shared_ptr<Directorio> buscarElemento (const std::string elemento) const throw(noEncontrado);
+	std::shared_ptr<Nodo> buscarElemento (const std::string elemento) const throw(noEncontrado);
 public:
 	// Constructor
 	Ruta(const Directorio& raiz);
