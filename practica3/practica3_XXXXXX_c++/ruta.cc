@@ -42,54 +42,41 @@ shared_ptr<Directorio> Ruta::buscarElemento (const string elemento) const throw(
 
 
 void Ruta::cd(const string path) {
-	if (path == ".."){
-		try{
-			if(ruta.size() > 1){
-				ruta.pop_back();
+	list<shared_ptr<Directorio>> copy= ruta;
+	try{
+		string aux=path;
+		while(aux!=""){
+			size_t f= aux.find("/");
+			string pri=aux.substr(0,f);
+			if(f!=-1){
+				aux=aux.substr(f+1);
 			}
 			else{
-				throw rutaCdInvalida();
+				aux="";
 			}
-		}
-		catch(rutaCdInvalida& e){
-			cout<< e.what()<<endl;
-		}
-	}
-	else if (path == "/") {
-		shared_ptr<Directorio> aux= ruta.front(); 
-		ruta.clear();
-    	ruta.push_front(aux);
-	}
-	else if (path!= ".") {
-		//Esto no es lo más eficiente. Seguro que se puede mejorar.
-		if(path.substr(0,1)=="/"){
-			list<shared_ptr<Directorio>> rutaAux= ruta;
-			this->cd("/"); //Recursivo
-			this->cd(path.substr(1,path.size()-1));
-			//vacia todo.
-			//comprueba si existen todo los directorios.
-			//Llenalo con los componentes de la cadena.
-			//Si salta una excepcion vuelve a cargar ruta con lo que había antes.
-		}
-		else{
-			string aux=path;
-			while(aux!=""){
-				cout<<"Entra como:"<<aux<<endl;
-				size_t f= path.find("/");
-				shared_ptr<Directorio> dest = ruta.back()->buscarElto(aux.substr(0,f));
-				ruta.push_back(dest);
-				if(f!=-1){
-					aux=aux.substr(f+1);
+			if (pri == ".."){
+				if(ruta.size() > 1){
+					ruta.pop_back();
 				}
 				else{
-					aux="";
+					throw rutaCdInvalida();
 				}
-				cout<<"Sale como:"<<aux<<endl;
+			}
+			else if (path == "/") {
+				shared_ptr<Directorio> aux= ruta.front(); 
+				ruta.clear();
+		    	ruta.push_front(aux);
+			}
+			else if (path!= ".") {
+				shared_ptr<Directorio> dest = ruta.back()->buscarElto(pri);
+				ruta.push_back(dest);
 			}
 		}
 	}
-	
-    
+	catch(noEncontrado& e){
+		cout<< e.what();
+		ruta=copy;
+	}
 }
 
 
