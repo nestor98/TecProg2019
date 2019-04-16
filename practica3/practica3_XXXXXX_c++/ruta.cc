@@ -48,7 +48,7 @@ void Ruta::cd(const string path) {
 				pri=aux.substr(0,f);
 			}
 			
-			cout<<"Esto es pri "<<pri<<endl;
+			// cout<<"Esto es pri "<<pri<<endl;
 			if(f!=-1){
 				aux=aux.substr(f+1);
 			}
@@ -83,9 +83,28 @@ void Ruta::cd(const string path) {
 	}
 }
 
-
+// Muestra por pantalla un número que es el tamaño del
+// archivo, directorio o enlace dentro de la ruta actual identificado por la cadena de texto
+// que se le pasa como parámetro. También se le puede pasar una ruta completa.
 void Ruta::stat(const string element) const {
-    
+	try{
+		shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(element);
+		cout << encontrado->tamagno() << endl;
+	}
+	catch(noEncontrado& e){ // no es ruta relativa
+		try { // probamos con la absoluta
+			list<shared_ptr<Directorio>> copy = ruta;
+			size_t pos = element.find_last_of("/"); // pos de la ultima "/" de <element>
+			cout << "La pos es " << pos << endl;
+			this.cd(element.substr(0, pos));
+			this.stat(element.substr(pos));
+			ruta = copy; // volvemos a donde estabamos
+		}	
+		catch (rutaCdInvalida e) { // ni relativa ni absoluta
+			cout << element << " no existe." << endl;
+			cout<< e.what();
+		}
+	}
 }
 
 void Ruta::vim(const string file, const int size) const {
@@ -94,7 +113,8 @@ void Ruta::vim(const string file, const int size) const {
 
 void Ruta::mkdir(const string dir)  {
 	try{
-		shared_ptr<Nodo> foo = ruta.back()->buscarElto(dir);
+		// nota: lo del principio creo que no vale pa na
+		/*shared_ptr<Nodo> foo = */ruta.back()->buscarElto(dir); 
 		cout<<"Ya existe un elemento de nombre "<<dir<<endl;
 	}
 	catch(noEncontrado& e){

@@ -4,7 +4,7 @@
 Enlace::Enlace(const string nombre) : Nodo(nombre) {}
     
 
-int Enlace::tamagno()  {
+int Enlace::tamagno() const {
     return rutaEnlazada->tamagno();
 }
 
