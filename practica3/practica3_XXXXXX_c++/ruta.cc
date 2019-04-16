@@ -86,7 +86,7 @@ void Ruta::cd(const string path) {
 // Muestra por pantalla un número que es el tamaño del
 // archivo, directorio o enlace dentro de la ruta actual identificado por la cadena de texto
 // que se le pasa como parámetro. También se le puede pasar una ruta completa.
-void Ruta::stat(const string element) const {
+void Ruta::stat(const string element) {
 	try{
 		shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(element);
 		cout << encontrado->tamagno() << endl;
@@ -95,14 +95,18 @@ void Ruta::stat(const string element) const {
 		try { // probamos con la absoluta
 			list<shared_ptr<Directorio>> copy = ruta;
 			size_t pos = element.find_last_of("/"); // pos de la ultima "/" de <element>
-			cout << "La pos es " << pos << endl;
-			this.cd(element.substr(0, pos));
-			this.stat(element.substr(pos));
+			if (pos == string::npos) { // no ha encontrado
+				throw rutaCdInvalida();
+			}
+			// cout << "La pos es " << pos << endl;
+			// cout << "La ruta es " << element.substr(0, pos) << endl;
+			// cout << "El nombre es " << element.substr(pos+1) << endl;
+			this->cd(element.substr(0, pos));
+			this->stat(element.substr(pos+1));
 			ruta = copy; // volvemos a donde estabamos
-		}	
+		}
 		catch (rutaCdInvalida e) { // ni relativa ni absoluta
 			cout << element << " no existe." << endl;
-			cout<< e.what();
 		}
 	}
 }

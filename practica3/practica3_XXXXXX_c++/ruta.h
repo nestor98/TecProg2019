@@ -35,7 +35,7 @@ public:
 	// Muestra por pantalla un número que es el tamaño del
 	// archivo, directorio o enlace dentro de la ruta actual identificado por la cadena de texto
 	// que se le pasa como parámetro. También se le puede pasar una ruta completa.
-	void stat(const std::string element) const;
+	void stat(const std::string element);
 
 	// Cambia el tamaño de un archivo dentro de la
 	// ruta actual (no se le puede pasar como parámetro una ruta completa). Si el archivo no
