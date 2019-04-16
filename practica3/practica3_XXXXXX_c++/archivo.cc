@@ -4,7 +4,7 @@
 Archivo::Archivo(const string nombre) : Nodo(nombre) {}
     
 
-int Archivo::tamagno() {
+int Archivo::tamagno() const {
     return tam;
 }
 

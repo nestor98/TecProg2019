@@ -23,11 +23,11 @@ public:
 	}
 
 	// Devuelve el tamagno del fichero
-	virtual int tamagno()  {}
+	virtual int tamagno() const {}
 
 	virtual void ls() const {}
 
-	virtual void agndir(const shared_ptr<Nodo> p);
+	virtual void agndir(const shared_ptr<Nodo> p) {}
 
 	virtual shared_ptr<Nodo> buscarElto(const string elemento) const {}
 

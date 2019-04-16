@@ -15,7 +15,7 @@ private:
 public:
 	Directorio(const string nombre);
 
-	int tamagno() override;
+	int tamagno() const override;
 
 	void ls() const override;
 

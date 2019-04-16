@@ -13,7 +13,7 @@ private:
 public:
 	arbol_ficheros_error(const std::string nombre) : nom(nombre)  {}
 	virtual ~arbol_ficheros_error() {}
-	virtual const char* what() const{};
+	virtual const char* what() const {}
 
 };
 
@@ -24,7 +24,7 @@ class noEncontrado : public arbol_ficheros_error {
 
 public:
 	noEncontrado() : arbol_ficheros_error("No encontrado") {}
-	~noEncontrado(){}
+	~noEncontrado() {}
 	const char* what() const override {
 		return ""; // Esta en principio no saca nada por pantalla
 	}

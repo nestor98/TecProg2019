@@ -14,7 +14,7 @@ void Directorio::ls() const {
 	cout << endl;
 }
 
-int Directorio::tamagno(){
+int Directorio::tamagno() const {
 	int tam=0;
 	for (auto nodo : nodos){
 		tam+= nodo->tamagno();
