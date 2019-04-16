@@ -17,6 +17,8 @@ public:
 
 	int tamagno() const override;
 
+	void modificarTamagno(const int nuevoT) override;
+
 	void ls() const override;
 
 	void agndir(const shared_ptr<Nodo> p) override;

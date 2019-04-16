@@ -21,6 +21,10 @@ int Directorio::tamagno() const {
 	}
 }
 
+void Directorio::modificarTamagno(const int nuevoT) {
+	cerr << "Imposible modificar el tamagno de un directorio" << endl;
+}
+
 void Directorio::agndir(const shared_ptr<Nodo> p){
 	nodos.push_back(p);
 	//METER UNA EXCEPCION. EN CASO DE QUE EXISTA UN DIRECTORIO DE NOMBRE DIR.

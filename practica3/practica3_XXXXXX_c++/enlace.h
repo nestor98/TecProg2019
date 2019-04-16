@@ -14,8 +14,8 @@ public:
 	// devuelve el tamagno del enlace (0 supongo)
 	int tamagno() const override;
 
-	// Altera el tam. del archivo a <nuevoT>. Devuelve true sii ha sido posible?
-	bool modificarTamagno(const int nuevoT);
+	// Altera el tam. del archivo enlazado a <nuevoT>.
+	void modificarTamagno(const int nuevoT) override;
 };
 
 

@@ -118,14 +118,16 @@ void Ruta::stat(const string element) {
 // existe dentro de la ruta actual, se crea automáticamente con el nombre y tamaño
 // espeficados. Si el archivo referenciado por “file” es en realidad un enlace a un archivo,
 // también cambia su tamaño.
-void Ruta::vim(const string file, const int size) const {
-	try{
+void Ruta::vim (const string file, const int size) const {
+	try {
 		shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(file);
-		cout << encontrado->tamagno() << endl;
+		encontrado->modificarTamagno(size);
+		// cout << encontrado->tamagno() << endl;
 	}
-	catch(noEncontrado& e){ // no existia, lo creamos
-		
-		
+	catch(noEncontrado& e) { // no existia, lo creamos
+		shared_ptr<Nodo> nuevo = make_shared<Archivo>(file, size);
+		ruta.back()->agndir(nuevo);
+		// cerr << "agnadido " << *nuevo << endl;
 	}
 }
 

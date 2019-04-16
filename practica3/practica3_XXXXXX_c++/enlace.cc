@@ -8,8 +8,8 @@ int Enlace::tamagno() const {
     return rutaEnlazada->tamagno();
 }
 
-bool Enlace::modificarTamagno(const int nuevoT) {
-    
+void Enlace::modificarTamagno(const int nuevoT) {
+    rutaEnlazada->modificarTamagno(nuevoT);
 }
 
 

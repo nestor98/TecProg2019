@@ -25,6 +25,9 @@ public:
 	// Devuelve el tamagno del fichero
 	virtual int tamagno() const {}
 
+	// Modifica el tamagno del fichero (a nuevoT)
+	virtual void modificarTamagno(const int nuevoT) {}
+
 	virtual void ls() const {}
 
 	virtual void agndir(const shared_ptr<Nodo> p) {}
@@ -35,10 +38,10 @@ public:
 
 
 // Devuelve el nombre del nodo
-/*
+
 std::ostream& operator<< (std::ostream& os, const Nodo& n) {
 	return os << n.nombre();
 }
-*/
+
 
 #endif
