@@ -111,9 +111,24 @@ void Ruta::stat(const string element) {
 	}
 }
 
+
+
+// Cambia el tamaño de un archivo dentro de la
+// ruta actual (no se le puede pasar como parámetro una ruta completa). Si el archivo no
+// existe dentro de la ruta actual, se crea automáticamente con el nombre y tamaño
+// espeficados. Si el archivo referenciado por “file” es en realidad un enlace a un archivo,
+// también cambia su tamaño.
 void Ruta::vim(const string file, const int size) const {
-    
+	try{
+		shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(file);
+		cout << encontrado->tamagno() << endl;
+	}
+	catch(noEncontrado& e){ // no existia, lo creamos
+		
+		
+	}
 }
+
 
 void Ruta::mkdir(const string dir)  {
 	try{
