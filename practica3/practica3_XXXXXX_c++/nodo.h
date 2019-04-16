@@ -34,14 +34,18 @@ public:
 
 	virtual shared_ptr<Nodo> buscarElto(const string elemento) const {}
 
+
+
+
 };
 
 
 // Devuelve el nombre del nodo
 
-std::ostream& operator<< (std::ostream& os, const Nodo& n) {
+inline std::ostream& operator<< (std::ostream& os, const Nodo& n) {
 	return os << n.nombre();
 }
+
 
 
 #endif

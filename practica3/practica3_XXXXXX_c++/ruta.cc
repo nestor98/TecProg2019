@@ -7,6 +7,9 @@
 #include "enlace.h"
 
 using namespace std;
+
+
+
 Ruta::Ruta(const Directorio& raiz) {
 	shared_ptr<Directorio> p = make_shared<Directorio>(raiz);
     ruta.push_front(p);
@@ -144,6 +147,11 @@ void Ruta::mkdir(const string dir)  {
 	}
 }
 
+
+// Crea un enlace simbólico de nombre “dest” a que
+// enlaza el elemento identificado mediante el nombre “orig”. “dest” no puede contener
+// una ruta completa, pero “orig” sí, de tal modo que pueden crearse enlaces simbólicos
+// entre elementos dentro de diferentes posiciones del árbol de directorios.
 void Ruta::ln(const string orig, const string dest) const {
     
 }
