@@ -18,7 +18,8 @@ int Directorio::tamagno() const {
 	int tam=0;
 	for (auto nodo : nodos){
 		tam += nodo->tamagno();
-	}
+	} 
+	return tam;
 }
 
 void Directorio::modificarTamagno(const int nuevoT) {

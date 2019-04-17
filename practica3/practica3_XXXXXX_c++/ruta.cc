@@ -104,7 +104,15 @@ void Ruta::stat(const string element) {
 			// cout << "La pos es " << pos << endl;
 			// cout << "La ruta es " << element.substr(0, pos) << endl;
 			// cout << "El nombre es " << element.substr(pos+1) << endl;
-			this->cd(element.substr(0, pos));
+			if (pos == 0) { // caso especial, solo un nivel: "/a"
+				// Necesitamos guardar la "/"
+				this->cd("/");
+			// ( equivalente a cd(element.substr(0, pos+1)) )
+			}
+			else { // Resto de casos, se quita la ultima "/"
+				this->cd(element.substr(0, pos));
+			}
+			// cout << this->pwd() << endl;
 			this->stat(element.substr(pos+1));
 			ruta = copy; // volvemos a donde estabamos
 		}
@@ -174,11 +182,19 @@ void Ruta::ln(const string orig, const string dest) {
 				// cout << "La pos es " << pos << endl;
 				// cout << "La ruta es " << orig.substr(0, pos) << endl;
 				// cout << "El nombre es " << orig.substr(pos+1) << endl;
-				this->cd(orig.substr(0, pos));
-				shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(orig);
+				if (pos == 0) { // caso especial, solo un nivel: "/a"
+					// Necesitamos guardar la "/"
+					this->cd("/");
+					// ( equivalente a cd(orig.substr(0, pos+1)) )
+				}
+				else { // Resto de casos, se quita la ultima "/"
+					this->cd(orig.substr(0, pos));
+				}
+				shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(orig.substr(pos+1));
 				ruta = copy; // volvemos a donde estabamos
-				shared_ptr<Nodo> enlace(new Enlace(dest, encontrado));
+				shared_ptr<Enlace> enlace(new Enlace(dest, encontrado));
 				ruta.back()->agndir(enlace);
+				cout << enlace->info() << endl;
 			}
 			catch (rutaCdInvalida e) { // ni relativa ni absoluta
 				cout << orig << " no existe." << endl;

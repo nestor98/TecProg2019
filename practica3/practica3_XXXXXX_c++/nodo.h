@@ -10,11 +10,11 @@ using namespace std;
 class Nodo {
 private:
 	std::string nom;
-	static int iteraciones;
+	// static int iteraciones;
 
 public:
 	Nodo(const std::string nombre) : nom(nombre) {
-		iteraciones = 0;
+		// iteraciones = 0;
 	}
 
 	std::string nombre() const {
@@ -40,13 +40,10 @@ public:
 
 };
 
-
 // Devuelve el nombre del nodo
 
 inline std::ostream& operator<< (std::ostream& os, const Nodo& n) {
 	return os << n.nombre();
 }
-
-
 
 #endif
