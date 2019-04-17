@@ -152,28 +152,37 @@ void Ruta::mkdir(const string dir)  {
 // una ruta completa, pero “orig” sí, de tal modo que pueden crearse enlaces simbólicos
 // entre elementos dentro de diferentes posiciones del árbol de directorios.
 void Ruta::ln(const string orig, const string dest) const {
-	try { // Ruta relativa
-		shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(orig);
-		shared_ptr<Nodo> enlace(new Enlace(dest, encontrado))
-		cout << enlace.info() << endl;
+	try { // Comprobamos que dest es nuevo
+		ruta.back()->buscarElto(dest);
+		cerr << "Ya existe un elemento de nombre " << dest << endl;
 	}
-	catch(noEncontrado& e){ // no es ruta relativa
-		try { // probamos con la absoluta
-			list<shared_ptr<Directorio>> copy = ruta;
-			size_t pos = element.find_last_of("/"); // pos de la ultima "/" de <element>
-			if (pos == string::npos) { // no ha encontrado
-				throw rutaCdInvalida();
-			}
-			// cout << "La pos es " << pos << endl;
-			// cout << "La ruta es " << element.substr(0, pos) << endl;
-			// cout << "El nombre es " << element.substr(pos+1) << endl;
-			this->cd(element.substr(0, pos));
-			this->stat(element.substr(pos+1));
-			
-			ruta = copy; // volvemos a donde estabamos
+	catch (const noEncontrado& e) { // dest correcto
+		// buscamos orig:
+		try { // Ruta relativa
+			shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(orig);
+			shared_ptr<Nodo> enlace(new Enlace(dest, encontrado))
+			ruta.back()->agndir(enlace);
+			cout << enlace.info() << endl;
 		}
-		catch (rutaCdInvalida e) { // ni relativa ni absoluta
-			cout << orig << " no existe." << endl;
+		catch(noEncontrado& e){ // no es ruta relativa
+			try { // probamos con la absoluta
+				list<shared_ptr<Directorio>> copy = ruta;
+				size_t pos = element.find_last_of("/"); // pos de la ultima "/" de <element>
+				if (pos == string::npos) { // no ha encontrado
+					throw rutaCdInvalida();
+				}
+				// cout << "La pos es " << pos << endl;
+				// cout << "La ruta es " << element.substr(0, pos) << endl;
+				// cout << "El nombre es " << element.substr(pos+1) << endl;
+				this->cd(element.substr(0, pos));
+				shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(orig);
+				ruta = copy; // volvemos a donde estabamos
+				shared_ptr<Nodo> enlace(new Enlace(dest, encontrado))
+				ruta.back()->agndir(enlace);
+			}
+			catch (rutaCdInvalida e) { // ni relativa ni absoluta
+				cout << orig << " no existe." << endl;
+			}
 		}
 	}
 }
