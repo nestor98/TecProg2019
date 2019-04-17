@@ -30,12 +30,6 @@ void Ruta::ls() const {
 	ruta.back()->ls(); // ls de directorio
 }
 
-// Busca <elemento> en la ruta. Si no lo encuentra lanza la excepcion
-/*
-shared_ptr<Nodo> Ruta::buscarElemento (const string elemento) const throw(noEncontrado) {
-	
-}
-*/
 
 void Ruta::cd(const string path) {
 	list<shared_ptr<Directorio>> copy= ruta;
@@ -101,6 +95,7 @@ void Ruta::stat(const string element) {
 			list<shared_ptr<Directorio>> copy = ruta;
 			size_t pos = element.find_last_of("/"); // pos de la ultima "/" de <element>
 			if (pos == string::npos) { // no ha encontrado
+				cout << "YEP: " << string::npos << " == " << pos << " ... " << element << endl;
 				throw rutaCdInvalida();
 			}
 			// cout << "La pos es " << pos << endl;
@@ -118,7 +113,7 @@ void Ruta::stat(const string element) {
 			ruta = copy; // volvemos a donde estabamos
 		}
 		catch (rutaCdInvalida e) { // ni relativa ni absoluta
-			cerr << e.what() << endl;
+			cerr << element << " no existe" << endl;
 		}
 	}
 }
@@ -227,7 +222,14 @@ void Ruta::rm(const string e) {
 			if (pos == string::npos) { // no ha encontrado
 				throw rutaCdInvalida();
 			}
-			this->cd(e.substr(0, pos));
+			if (pos == 0) { // caso especial, solo un nivel: "/a"
+				// Necesitamos guardar la "/"
+				this->cd("/");
+				// ( equivalente a cd(e.substr(0, pos+1)) )
+			}
+			else { // Resto de casos, se quita la ultima "/"
+				this->cd(e.substr(0, pos));
+			}
 			this->rm(e.substr(pos+1));
 			ruta = copy; // volvemos a donde estabamos
 		}

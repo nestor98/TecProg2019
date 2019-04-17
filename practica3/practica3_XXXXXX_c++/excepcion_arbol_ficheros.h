@@ -58,11 +58,6 @@ public:
 
 
 
-
-
-
-
-
 class maxRecursividad : public arbol_ficheros_error {
 private:
 	int MAX_LLAMADAS;
