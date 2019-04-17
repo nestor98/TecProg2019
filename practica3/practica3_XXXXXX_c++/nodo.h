@@ -10,8 +10,12 @@ using namespace std;
 class Nodo {
 private:
 	std::string nom;
+	static int iteraciones;
+
 public:
-	Nodo(const std::string nombre) : nom(nombre) {}
+	Nodo(const std::string nombre) : nom(nombre) {
+		iteraciones = 0;
+	}
 
 	std::string nombre() const {
 		return nom;
@@ -33,9 +37,6 @@ public:
 	virtual void agndir(const shared_ptr<Nodo> p) {}
 
 	virtual shared_ptr<Nodo> buscarElto(const string elemento) const {}
-
-
-
 
 };
 

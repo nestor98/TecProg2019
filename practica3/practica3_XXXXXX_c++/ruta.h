@@ -52,7 +52,7 @@ public:
 	// enlaza el elemento identificado mediante el nombre “orig”. “dest” no puede contener
 	// una ruta completa, pero “orig” sí, de tal modo que pueden crearse enlaces simbólicos
 	// entre elementos dentro de diferentes posiciones del árbol de directorios.
-	void ln(const std::string orig, const std::string dest) const;
+	void ln(const std::string orig, const std::string dest);
 
  	// Elimina un elemento dentro de la ruta actual (puede pasársele
 	// como parámetro una ruta completa). Si es un archivo es simplemente eliminado. Si es
