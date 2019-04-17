@@ -15,9 +15,16 @@ private:
 public:
 	Directorio(const string nombre);
 
+	int tamagno() const override;
+
+	void modificarTamagno(const int nuevoT) override;
+
 	void ls() const override;
 
+	void agndir(const shared_ptr<Nodo> p) override;
+	//
 	shared_ptr<Nodo> buscarElto(const string elemento) const throw(noEncontrado) override;
+
 };
 
 #endif

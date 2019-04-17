@@ -10,10 +10,10 @@ OBJS=$(SRCS:.cc=.o)
 
 all: $(PROG)
 
-$(PROG): $(OBJS) nodo.h
+$(PROG): $(OBJS) nodo.h excepcion_arbol_ficheros.h
 	$(CC) $(CFLAGS) -o $@ $^
 
-%.o: %.cc
+%.o: %.cc %.h
 	$(CC) $(CFLAGS) -c $<
 
 clean:

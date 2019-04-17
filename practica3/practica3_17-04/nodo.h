@@ -10,6 +10,7 @@ using namespace std;
 class Nodo {
 private:
 	std::string nom;
+
 public:
 	Nodo(const std::string nombre) : nom(nombre) {}
 
@@ -25,17 +26,21 @@ public:
 	// Devuelve el tamagno del fichero
 	virtual int tamagno() const {}
 
+	// Modifica el tamagno del fichero (a nuevoT)
+	virtual void modificarTamagno(const int nuevoT) {}
+
 	virtual void ls() const {}
 
+	virtual void agndir(const shared_ptr<Nodo> p) {}
+
 	virtual shared_ptr<Nodo> buscarElto(const string elemento) const {}
+
 };
 
-
 // Devuelve el nombre del nodo
-std::ostream& operator<< (std::ostream& os, const Nodo& n) {
+
+inline std::ostream& operator<< (std::ostream& os, const Nodo& n) {
 	return os << n.nombre();
 }
-
-
 
 #endif
