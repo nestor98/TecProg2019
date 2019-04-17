@@ -51,7 +51,6 @@ void Ruta::cd(const string path) {
 				pri=aux.substr(0,f);
 			}
 			
-			// cout<<"Esto es pri "<<pri<<endl;
 			if(f!=-1){
 				aux=aux.substr(f+1);
 			}
@@ -80,7 +79,7 @@ void Ruta::cd(const string path) {
 		}
 	}
 	catch(noEncontrado& e){
-		cout<<path<<" no existe idiota."<<endl;
+		cout<<path<<" no existe."<<endl;
 		cout<< e.what();
 		ruta=copy;
 	}
@@ -112,7 +111,6 @@ void Ruta::stat(const string element) {
 			else { // Resto de casos, se quita la ultima "/"
 				this->cd(element.substr(0, pos));
 			}
-			// cout << this->pwd() << endl;
 			this->stat(element.substr(pos+1));
 			ruta = copy; // volvemos a donde estabamos
 		}
@@ -129,28 +127,43 @@ void Ruta::stat(const string element) {
 // espeficados. Si el archivo referenciado por “file” es en realidad un enlace a un archivo,
 // también cambia su tamaño.
 void Ruta::vim (const string file, const int size) const {
-	try {
-		shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(file);
-		encontrado->modificarTamagno(size);
-		// cout << encontrado->tamagno() << endl;
+	try{
+		size_t f= file.find("/");
+		if(f!=-1){
+			throw nombreInvalido();
+		}
+		try {
+			shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(file);
+			encontrado->modificarTamagno(size);
+		}
+		catch(noEncontrado& e) { // no existia, lo creamos
+			shared_ptr<Nodo> nuevo = make_shared<Archivo>(file, size);
+			ruta.back()->agndir(nuevo);
+		}
+	}catch(nombreInvalido& e){
+		cerr<<e.what()<<endl;
 	}
-	catch(noEncontrado& e) { // no existia, lo creamos
-		shared_ptr<Nodo> nuevo = make_shared<Archivo>(file, size);
-		ruta.back()->agndir(nuevo);
-		// cerr << "agnadido " << *nuevo << endl;
-	}
+	
 }
 
 
 void Ruta::mkdir(const string dir)  {
 	try{
-		// nota: lo del principio creo que no vale pa na
-		/*shared_ptr<Nodo> foo = */ruta.back()->buscarElto(dir); 
-		cout<<"Ya existe un elemento de nombre "<<dir<<endl;
+		size_t f= dir.find("/");
+		if(f!=-1){
+			throw nombreInvalido();
+		}
+		try{
+				ruta.back()->buscarElto(dir); 
+				cout<<"Ya existe un elemento de nombre "<<dir<<endl;
+			}
+			catch(noEncontrado& e){
+				shared_ptr<Directorio> p(new Directorio(dir));
+		    	ruta.back()->agndir(p);
+		}
 	}
-	catch(noEncontrado& e){
-		shared_ptr<Directorio> p(new Directorio(dir));
-    	ruta.back()->agndir(p);
+	catch(nombreInvalido& e){
+		cerr<<e.what()<<endl;
 	}
 }
 
@@ -200,6 +213,23 @@ void Ruta::ln(const string orig, const string dest) {
 	}
 }
 
-void Ruta::rm(const string e) const {
-    
+void Ruta::rm(const string e) {
+    try{
+    	ruta.back()->eliminarElto(e);
+	}
+	catch(noEncontrado& f){ // no es ruta relativa
+		try { // probamos con la absoluta
+			list<shared_ptr<Directorio>> copy = ruta;
+			size_t pos = e.find_last_of("/"); // pos de la ultima "/" de <e>
+			if (pos == string::npos) { // no ha encontrado
+				throw rutaCdInvalida();
+			}
+			this->cd(e.substr(0, pos));
+			this->rm(e.substr(pos+1));
+			ruta = copy; // volvemos a donde estabamos
+		}
+		catch (rutaCdInvalida ff) { // ni relativa ni absoluta
+			cout << e << " no existe." << endl;
+		}
+	}
 }

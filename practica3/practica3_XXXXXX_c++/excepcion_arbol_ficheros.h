@@ -44,6 +44,25 @@ public:
 };
 
 
+
+class nombreInvalido : public arbol_ficheros_error {
+
+public:
+	nombreInvalido() : arbol_ficheros_error("nombre invalido") {}
+	~nombreInvalido(){}
+	const char* what() const override {
+		return "El nombre no puede contener /"; // Esta en principio no saca nada por pantalla
+	}
+
+};
+
+
+
+
+
+
+
+
 class maxRecursividad : public arbol_ficheros_error {
 private:
 	int MAX_LLAMADAS;
@@ -57,38 +76,24 @@ public:
 	}
 
 	const char* what() const override {
-		std::string respuestaStr = "Maximas (" + std::to_string(MAX_LLAMADAS) + ") llamadas recursivas alcanzadas";
-		// std::cout << respuestaStr << std::endl;
-		return respuestaStr.c_str();
+		return "Maximas llamadas recursivas alcanzadas.";
 	}
 };
-
 
 
 
 
 /*
-class arbol_ficheros_error : public arbol_ficheros_error {
+
+class out_of_range{
 
 public:
-	// arbol_ficheros_error() {}
+	out_of_range() {}
 
-	const char* what() const override {
-		return ""; // Esta en principio no saca nada por pantalla
+	const char* what() const {
+		return "Numero de parametros invalido.";
 	}
 
-};
-*/
-
-// class out_of_range : public arbol_ficheros_error {
-
-// public:
-// 	out_of_range() {}
-
-// 	const char* what() const override {
-// 		return ""; // Esta en principio no saca nada por pantalla
-// 	}
-
-// }
+};*/
 
 #endif

@@ -10,6 +10,7 @@ using namespace std;
 class Nodo {
 private:
 	std::string nom;
+	// static int iteraciones;
 
 public:
 	Nodo(const std::string nombre) : nom(nombre) {}

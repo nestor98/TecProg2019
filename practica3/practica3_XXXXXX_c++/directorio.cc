@@ -9,16 +9,15 @@ Directorio::Directorio(const string nombre) : Nodo(nombre) {}
 
 void Directorio::ls() const {
 	for (auto ptNodo : nodos) {
-		cout << ptNodo->nombre() << "  ";
+		cout << ptNodo->nombre() <<endl;
 	}
-	cout << endl;
 }
 
 int Directorio::tamagno() const {
 	int tam=0;
 	for (auto nodo : nodos){
 		tam += nodo->tamagno();
-	} 
+	}
 	return tam;
 }
 
@@ -49,4 +48,18 @@ shared_ptr<Nodo> Directorio::buscarElto(const string elemento) const throw(noEnc
 		throw noEncontrado();
 	}
 	return buscado;	
+}
+
+void Directorio::eliminarElto(const string e){
+	bool encontrado = false;
+	for (auto it1=nodos.begin(); it1!=nodos.end(); ++it1) {
+		if ((*it1)->nombre() == e) {
+			encontrado = true;
+			nodos.erase(it1);
+			break;
+		}
+	}
+	if (!encontrado) {
+		throw noEncontrado();
+	}	
 }

@@ -61,7 +61,7 @@ public:
 	// enlazando al elemento borrado. Así pues, para eliminar completamente un elemento
 	// hay que borrar el elemento y todos los enlaces que apuntan a dicho elemento de forma
 	// manual.
-	void rm(const std::string e) const;
+	void rm(const std::string e);
 };
 
 #endif

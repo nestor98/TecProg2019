@@ -25,6 +25,7 @@ public:
 	//
 	shared_ptr<Nodo> buscarElto(const string elemento) const throw(noEncontrado) override;
 
+	void eliminarElto(const string e);
 };
 
 #endif
