@@ -95,12 +95,8 @@ void Ruta::stat(const string element) {
 			list<shared_ptr<Directorio>> copy = ruta;
 			size_t pos = element.find_last_of("/"); // pos de la ultima "/" de <element>
 			if (pos == string::npos) { // no ha encontrado
-				cout << "YEP: " << string::npos << " == " << pos << " ... " << element << endl;
 				throw rutaCdInvalida();
 			}
-			// cout << "La pos es " << pos << endl;
-			// cout << "La ruta es " << element.substr(0, pos) << endl;
-			// cout << "El nombre es " << element.substr(pos+1) << endl;
 			if (pos == 0) { // caso especial, solo un nivel: "/a"
 				// Necesitamos guardar la "/"
 				this->cd("/");
