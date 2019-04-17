@@ -115,7 +115,6 @@ void Ruta::stat(const string element) {
 }
 
 
-
 // Cambia el tamaño de un archivo dentro de la
 // ruta actual (no se le puede pasar como parámetro una ruta completa). Si el archivo no
 // existe dentro de la ruta actual, se crea automáticamente con el nombre y tamaño
@@ -153,7 +152,30 @@ void Ruta::mkdir(const string dir)  {
 // una ruta completa, pero “orig” sí, de tal modo que pueden crearse enlaces simbólicos
 // entre elementos dentro de diferentes posiciones del árbol de directorios.
 void Ruta::ln(const string orig, const string dest) const {
-    
+	try { // Ruta relativa
+		shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(orig);
+		shared_ptr<Nodo> enlace(new Enlace(dest, encontrado))
+		cout << enlace.info() << endl;
+	}
+	catch(noEncontrado& e){ // no es ruta relativa
+		try { // probamos con la absoluta
+			list<shared_ptr<Directorio>> copy = ruta;
+			size_t pos = element.find_last_of("/"); // pos de la ultima "/" de <element>
+			if (pos == string::npos) { // no ha encontrado
+				throw rutaCdInvalida();
+			}
+			// cout << "La pos es " << pos << endl;
+			// cout << "La ruta es " << element.substr(0, pos) << endl;
+			// cout << "El nombre es " << element.substr(pos+1) << endl;
+			this->cd(element.substr(0, pos));
+			this->stat(element.substr(pos+1));
+			
+			ruta = copy; // volvemos a donde estabamos
+		}
+		catch (rutaCdInvalida e) { // ni relativa ni absoluta
+			cout << orig << " no existe." << endl;
+		}
+	}
 }
 
 void Ruta::rm(const string e) const {

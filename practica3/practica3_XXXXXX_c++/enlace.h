@@ -14,6 +14,8 @@ public:
 	// devuelve el tamagno del enlace (0 supongo)
 	int tamagno() const override;
 
+	string info() const;
+
 	// Altera el tam. del archivo enlazado a <nuevoT>.
 	void modificarTamagno(const int nuevoT) override;
 };

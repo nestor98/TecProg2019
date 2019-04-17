@@ -9,8 +9,10 @@ int Enlace::tamagno() const {
     return rutaEnlazada->tamagno();
 }
 
+string Enlace::info() const {
+	return this.nombre() + " --> " + rutaEnlazada.nombre();
+}
+
 void Enlace::modificarTamagno(const int nuevoT) {
     rutaEnlazada->modificarTamagno(nuevoT);
 }
-
-
