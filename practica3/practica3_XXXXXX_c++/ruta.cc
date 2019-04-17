@@ -179,9 +179,6 @@ void Ruta::ln(const string orig, const string dest) {
 				if (pos == string::npos) { // no ha encontrado
 					throw rutaCdInvalida();
 				}
-				// cout << "La pos es " << pos << endl;
-				// cout << "La ruta es " << orig.substr(0, pos) << endl;
-				// cout << "El nombre es " << orig.substr(pos+1) << endl;
 				if (pos == 0) { // caso especial, solo un nivel: "/a"
 					// Necesitamos guardar la "/"
 					this->cd("/");
