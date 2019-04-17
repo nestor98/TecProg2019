@@ -38,7 +38,7 @@ public:
 	rutaCdInvalida() : arbol_ficheros_error("Ruta cd invalida") {}
 	~rutaCdInvalida(){}
 	const char* what() const override {
-		return "No se puede cambiar de directorio."; // Esta en principio no saca nada por pantalla
+		return "No se puede cambiar a ese directorio."; // Esta en principio no saca nada por pantalla
 	}
 
 };

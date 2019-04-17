@@ -75,12 +75,15 @@ void Ruta::cd(const string path) {
 				shared_ptr<Directorio> destDir= dynamic_pointer_cast<Directorio>(dest);
 				if(destDir!=nullptr)
 					ruta.push_back(destDir);
+				else {
+					cerr << path << " no es un directorio" << endl;
+				}
 			}
 		}
 	}
 	catch(noEncontrado& e){
-		cout<<path<<" no existe."<<endl;
-		cout<< e.what();
+		cerr<<path<<" no existe."<<endl;
+		cerr<< e.what();
 		ruta=copy;
 	}
 }
@@ -115,7 +118,7 @@ void Ruta::stat(const string element) {
 			ruta = copy; // volvemos a donde estabamos
 		}
 		catch (rutaCdInvalida e) { // ni relativa ni absoluta
-			cout << element << " no existe." << endl;
+			cerr << e.what() << endl;
 		}
 	}
 }
@@ -155,7 +158,7 @@ void Ruta::mkdir(const string dir)  {
 		}
 		try{
 				ruta.back()->buscarElto(dir); 
-				cout<<"Ya existe un elemento de nombre "<<dir<<endl;
+				cerr << "Ya existe un elemento de nombre " << dir << endl;
 			}
 			catch(noEncontrado& e){
 				shared_ptr<Directorio> p(new Directorio(dir));
@@ -183,7 +186,7 @@ void Ruta::ln(const string orig, const string dest) {
 			shared_ptr<Nodo> encontrado = ruta.back()->buscarElto(orig);
 			shared_ptr<Enlace> enlace(new Enlace(dest, encontrado));
 			ruta.back()->agndir(enlace);
-			cout << enlace->info() << endl;
+			// cout << enlace->info() << endl;
 		}
 		catch(noEncontrado& e){ // no es ruta relativa
 			try { // probamos con la absoluta
@@ -204,10 +207,10 @@ void Ruta::ln(const string orig, const string dest) {
 				ruta = copy; // volvemos a donde estabamos
 				shared_ptr<Enlace> enlace(new Enlace(dest, encontrado));
 				ruta.back()->agndir(enlace);
-				cout << enlace->info() << endl;
+				// cout << enlace->info() << endl;
 			}
 			catch (rutaCdInvalida e) { // ni relativa ni absoluta
-				cout << orig << " no existe." << endl;
+				cerr << orig << " no existe." << endl;
 			}
 		}
 	}
@@ -229,7 +232,7 @@ void Ruta::rm(const string e) {
 			ruta = copy; // volvemos a donde estabamos
 		}
 		catch (rutaCdInvalida ff) { // ni relativa ni absoluta
-			cout << e << " no existe." << endl;
+			cerr << e << " no existe." << endl;
 		}
 	}
 }
