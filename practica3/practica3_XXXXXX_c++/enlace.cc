@@ -10,13 +10,12 @@ const int MAX_REC = 500; // Maximas llamadas recursivas en tamagno
 
 Enlace::Enlace(const string nombre, const std::shared_ptr<Nodo> otroNodo) : 
 			   Nodo(nombre), rutaEnlazada(otroNodo) 
-{
-}
+{}
 
 int Enlace::tamagno() const {
 	int total;
 	try {
-		cout << "Iteracion: "<< iteraciones << endl;
+		// cout << "Iteracion: "<< iteraciones << endl;
 		if (iteraciones++ >= MAX_REC) {
 			iteraciones = 0; // Reseteamos
 			throw maxRecursividad(MAX_REC);

@@ -58,7 +58,7 @@ public:
 
 	const char* what() const override {
 		std::string respuestaStr = "Maximas (" + std::to_string(MAX_LLAMADAS) + ") llamadas recursivas alcanzadas";
-		std::cout << respuestaStr << std::endl;
+		// std::cout << respuestaStr << std::endl;
 		return respuestaStr.c_str();
 	}
 };
