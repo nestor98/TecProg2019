@@ -10,7 +10,7 @@ OBJS=$(SRCS:.cc=.o)
 
 all: $(PROG)
 
-$(PROG): $(OBJS) nodo.h excepcion_arbol_ficheros.h
+$(PROG): $(OBJS) practica4.h
 	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.cc %.h

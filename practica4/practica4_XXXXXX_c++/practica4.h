@@ -3,12 +3,27 @@
 
 
 
+class Almacen
+{
+private:
+	double capacidad;
+public:
+	Almacen();
+	bool guardar(? elemento){
+		if(cond=((capacidad-elemento.volumen)>0)
+			contenedor.push_back(elemento);
+		return cond;
+	}
+	
+};
+
+
+
 
 
 template<typename T>
 class Contenedor<T>{
 private:
-	double capacidad;
 	std::list<T> contenedor;
 
 public:
@@ -19,7 +34,6 @@ public:
 
 class Camion{
 private:
-	double capacidad;
 	std::list<Contenedor> contenedor; //Tambien se tienen que poner productos.
 public:
 	Camion(const double cap) : capacidad(cap) {}
@@ -36,3 +50,26 @@ public:
 
 }
 
+class Generico
+{
+public:
+	Generico();
+	~Generico();
+	
+};
+
+class Toxico
+{
+public:
+	Toxico();
+	~Toxico();
+	
+};
+
+class SerVivo
+{
+public:
+	SerVivo();
+	~SerVivo();
+	
+};
