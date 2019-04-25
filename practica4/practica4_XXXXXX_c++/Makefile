@@ -4,7 +4,7 @@ SRCS=main.cc
 CC=g++ -std=c++11
 #CC=clang++ -std=c++11
 
-CFLAGS:=-O3
+CFLAGS:=-O3 -std=c++11
 
 OBJS=$(SRCS:.cc=.o)
 
