@@ -9,8 +9,11 @@ private:
 	double capacidad;
 public:
 	Almacen();
+	bool cabe(double vol){
+		return vol<=capacidad;
+	}
 	bool guardar(? elemento){
-		if(cond=((capacidad-elemento.volumen)>0)
+		if(bool cond=cabe(elemento.vol()))
 			contenedor.push_back(elemento);
 		return cond;
 	}
@@ -21,14 +24,14 @@ public:
 
 
 
-template<typename T>
+template<typename T extends Producto>
 class Contenedor<T> : public Almacen, public Generico
 {
 private:
 	std::list<T> contenedor;
 
 public:
-	Contenedor(const double cap) : capacidad(cap) {}
+	Contenedor(const double cap, const string nom="") : capacidad(cap), nombre(nom), volumen(cap) {}
 }
 
 
@@ -49,6 +52,8 @@ private:
 	std::string nombre;
 public:
 	Producto(double vol, const std::string nom) : volumen(vol), nombre(nom) {}
+
+	double vol() const{ return volumen;}
 
 }
 
