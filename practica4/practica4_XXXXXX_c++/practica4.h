@@ -22,7 +22,8 @@ public:
 
 
 template<typename T>
-class Contenedor<T>{
+class Contenedor<T> : public Almacen, public Generico
+{
 private:
 	std::list<T> contenedor;
 
@@ -32,9 +33,10 @@ public:
 
 
 
-class Camion{
+class Camion : public Almacen
+{
 private:
-	std::list<Contenedor> contenedor; //Tambien se tienen que poner productos.
+	std::list<Generico> contenedor;
 public:
 	Camion(const double cap) : capacidad(cap) {}
 }
@@ -50,7 +52,7 @@ public:
 
 }
 
-class Generico
+class Generico : public Producto
 {
 public:
 	Generico();
@@ -58,7 +60,7 @@ public:
 	
 };
 
-class Toxico
+class Toxico : public Producto
 {
 public:
 	Toxico();
@@ -66,7 +68,7 @@ public:
 	
 };
 
-class SerVivo
+class SerVivo : public Producto
 {
 public:
 	SerVivo();
