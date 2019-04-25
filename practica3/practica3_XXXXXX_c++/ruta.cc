@@ -97,16 +97,24 @@ void Ruta::stat(const string element) {
 			if (pos == string::npos) { // no ha encontrado
 				throw rutaCdInvalida();
 			}
-			if (pos == 0) { // caso especial, solo un nivel: "/a"
-				// Necesitamos guardar la "/"
-				this->cd("/");
-			// ( equivalente a cd(element.substr(0, pos+1)) )
+			if (element == "/") {
+				// caso especial, stat /
+				cout << ruta.front()->tamagno() << endl;
 			}
-			else { // Resto de casos, se quita la ultima "/"
-				this->cd(element.substr(0, pos));
+			else {
+				if (pos == 0) { // otro caso especial, solo un nivel: "/a"
+					// Necesitamos guardar la "/"
+
+					this->cd("/");
+					
+					// ( equivalente a cd(element.substr(0, pos+1)) )
+				}
+				else { // Resto de casos, se quita la ultima "/"
+					this->cd(element.substr(0, pos));
+				}
+				this->stat(element.substr(pos+1));
+				ruta = copy; // volvemos a donde estabamos
 			}
-			this->stat(element.substr(pos+1));
-			ruta = copy; // volvemos a donde estabamos
 		}
 		catch (rutaCdInvalida e) { // ni relativa ni absoluta
 			cerr << element << " no existe" << endl;
