@@ -24,7 +24,7 @@ int main(int argc, char** argv)
 	contenedor_toxico.guardar(discos_melendi);
 
 	SerVivo elvis_presley(0.1, "Elvis Presley");
-	//camion.guardar(elvis_presley); //Esto no deberia compilar
+	// camion.guardar(elvis_presley); //Esto no deberia compilar
 	contenedor_servivo.guardar(elvis_presley);
 
 	Contenedor<Generico> otro_contenedor_generico(1);
@@ -33,8 +33,8 @@ int main(int argc, char** argv)
 	contenedor_generico.guardar(otro_contenedor_generico);
 	contenedor_generico.guardar(otro_contenedor_toxico);
 	contenedor_generico.guardar(otro_contenedor_servivo);
-	//contenedor_generico.guardar(camion); //Esto no deberia compilar
-	//contenedor_toxico.guardar(otro_contenedor_toxico); //Esto no deberia compilar
-	//contenedor_servivo.guardar(otro_contenedor_servivo); //Esto no deberia compilar
+	// contenedor_generico.guardar(camion); //Esto no deberia compilar
+	// contenedor_toxico.guardar(otro_contenedor_toxico); //Esto no deberia compilar
+	// contenedor_servivo.guardar(otro_contenedor_servivo); //Esto no deberia compilar
 }
 

@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once  // al compilador no le gusta esto porque solo hay un archivo
 #include <iostream>
 #include <list>
 
@@ -24,13 +24,14 @@ public:
 
 
 
-
-class Producto {
+class ProductoNoNecesariamenteGenerico {
 private:
 	double volumen;
 	std::string nombre;
 public:
-	Producto(double vol, const std::string nom) : volumen(vol), nombre(nom) {}
+	ProductoNoNecesariamenteGenerico(double vol, const std::string nom) : volumen(vol), nombre(nom) {}
+
+	~ProductoNoNecesariamenteGenerico(){}
 
 	double vol() const {
 		return volumen;
@@ -38,27 +39,42 @@ public:
 
 };
 
-class Generico : public Producto
+
+class Generico : public ProductoNoNecesariamenteGenerico
 {
 public:
-	Generico();
-	~Generico();
+	Generico(double vol, const std::string nom) : ProductoNoNecesariamenteGenerico(vol, nom) {}
+	~Generico() {}
 	
 };
 
-class Toxico : public Producto
+
+
+
+class Producto : public Generico {
+
+
+public:
+	Producto(double vol, const std::string nom) : Generico(vol, nom) {}
+
+	~Producto(){}
+};
+
+
+
+class Toxico : public ProductoNoNecesariamenteGenerico
 {
 public:
-	Toxico();
-	~Toxico();
+	Toxico(double vol, const std::string nom) : ProductoNoNecesariamenteGenerico(vol, nom) {}
+	~Toxico() {}
 	
 };
 
-class SerVivo : public Producto
+class SerVivo : public ProductoNoNecesariamenteGenerico
 {
 public:
-	SerVivo();
-	~SerVivo();
+	SerVivo(double vol, const std::string nom) : ProductoNoNecesariamenteGenerico(vol, nom) {}
+	~SerVivo() {}
 	
 };
 
@@ -69,8 +85,9 @@ private:
 	
 
 public:
-	Contenedor(const double cap, const std::string nom = "") : Almacen<T>(cap), Producto(cap, nom) {}
+	Contenedor(const double cap, const std::string nom = "") : Almacen<T>(cap), Generico(cap, nom) {}
 
+	~Contenedor() {}
 };
 
 
@@ -83,5 +100,6 @@ private:
 public:
 	Camion(const double cap) : Almacen<Generico>(cap) {}
 
+	~Camion() {}
 
 };
