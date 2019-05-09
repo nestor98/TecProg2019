@@ -48,19 +48,12 @@ public:
 	
 };
 
-
-
-
 class Producto : public Generico {
-
-
 public:
 	Producto(double vol, const std::string nom) : Generico(vol, nom) {}
 
 	~Producto(){}
 };
-
-
 
 class Toxico : public ProductoNoNecesariamenteGenerico
 {
@@ -81,22 +74,14 @@ public:
 template <typename T>
 class Contenedor : public Almacen<T>, public Generico
 {
-private:
-	
-
 public:
 	Contenedor(const double cap, const std::string nom = "") : Almacen<T>(cap), Generico(cap, nom) {}
 
 	~Contenedor() {}
 };
 
-
-
-
 class Camion : public Almacen<Generico>
 {
-private:
-
 public:
 	Camion(const double cap) : Almacen<Generico>(cap) {}
 
