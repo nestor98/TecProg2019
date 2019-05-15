@@ -57,23 +57,16 @@ pmulVble p (x:[]) = pmulCte p x
 pmulVble _ _ = error("Has llamado mal a pmulVble, melon")
 -- no se si se supone que se hace asi lo de los errores
 
--- Devuelve la multiplicacion de dos polinomios de igual long
-pmulEqual :: ArrayPol -> ArrayPol -> ArrayPol
-pmulEqual x y = zipWith (+) x y
 
-
+-- ****************    Por aqui esta el problema, se supone que algo de tipos:   ************************
+-- Devuelve la multiplicacion de dos polinomios   
 pmulTwo :: ArrayPol -> ArrayPol -> ArrayPol
-pmulTwo p1 p2 = p1
-
-
-pmulTwo x y
-    | l1 > l2 = (take diffl1l2 x) ++ paddEqual (drop diffl1l2 x) y
-    | l1 < l2 = (take diffl1l2 y) ++ paddEqual (drop diffl1l2 y) x
-    | otherwise = paddEqual x y
+pmulTwo p1 (x2:xs2) = foldr (paddTwo) (pmulVble p1 ([x2]++(take l2 [0..]))) (pmulTwo p1 xs2)
     where 
-        l1 = length x
-        l2 = length y
-        diffl1l2 = abs (l1-l2)
+        l2 = length xs2-- super ineficiente, recalcula la long cada vez (o sea, <primera long> veces)
+pmulTwo p1 (x2:[]) = pmulCte p1 x2
+
+-- ******************************************************************************************************
 
 
 
