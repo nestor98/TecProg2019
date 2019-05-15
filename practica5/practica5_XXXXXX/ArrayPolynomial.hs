@@ -46,12 +46,9 @@ padd (x:[]) = x
     
 
 
--- main = do
---      print p
---      print (peval p  2.0)
---      print dp
---      print (peval dp 2.0)
---      where
---          p  = padd [(pmul [x,x]),(coef 3.0),(pmul [(coef 2.0),x])]
---          dp = pderv p
+
+peval :: ArrayPol -> Float -> Float
+peval p x = folr (+) 0 (zipWith (*) p [x^i | i<-[0..length(p)-1]])
+peval [] x = []
+peval (p:[]) x = p
 
