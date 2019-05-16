@@ -11,6 +11,7 @@ main = do
         --print (pmulVble p1 p3)
         --print (pmultip)
         print (peval psuma 3)
+        print (pderv psuma)
         where 
             p1 = x
             p2 = coef 3

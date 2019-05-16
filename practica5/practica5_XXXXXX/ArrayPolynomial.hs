@@ -87,7 +87,7 @@ peval (p:[]) x = p
 
 
 pderv :: ArrayPol -> ArrayPol
-pderv p = zipWith (*) (tail p) [l-1,l-2..1]
+pderv p = zipWith (*) (init p) [(l-1),(l-2)..1]
 	where
-		l=length(p)
+		l= fromIntegral (length(p)) ::Float
 
