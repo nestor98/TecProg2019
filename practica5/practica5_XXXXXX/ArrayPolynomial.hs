@@ -60,26 +60,34 @@ pmulVble _ _ = error("Has llamado mal a pmulVble, melon")
 
 -- ****************    Por aqui esta el problema, se supone que algo de tipos:   ************************
 -- Devuelve la multiplicacion de dos polinomios   
-pmulTwo :: ArrayPol -> ArrayPol -> ArrayPol
-pmulTwo p1 (x2:xs2) = foldr (paddTwo) (pmulVble p1 ([x2]++(take l2 [0..]))) (pmulTwo p1 xs2)
-    where 
-        l2 = length xs2-- super ineficiente, recalcula la long cada vez (o sea, <primera long> veces)
-pmulTwo p1 (x2:[]) = pmulCte p1 x2
+--pmulTwo :: ArrayPol -> ArrayPol -> ArrayPol
+--pmulTwo p1 (x2:xs2) = foldr (paddTwo) (pmulVble p1 ([x2]++(take l2 [0..]))) (pmulTwo p1 xs2)
+  --  where 
+    --    l2 = length xs2-- super ineficiente, recalcula la long cada vez (o sea, <primera long> veces)
+--pmulTwo p1 (x2:[]) = pmulCte p1 x2
 
 -- ******************************************************************************************************
 
 
 
-pmul :: [ArrayPol] -> ArrayPol
-pmul (x:xs) = foldr (pmulTwo) x xs
-pmul [] = []
-pmul (x:[]) = x
+--pmul :: [ArrayPol] -> ArrayPol
+--pmul (x:xs) = foldr (pmulTwo) x xs
+--pmul [] = []
+--pmul (x:[]) = x
 
 
 
 
 peval :: ArrayPol -> Float -> Float
-peval p x = folr (+) 0 (zipWith (*) p [x^i | i<-[0..length(p)-1]])
-peval [] x = []
+peval p x = foldr (+) 0 (zipWith (*) p [x^i | i<-[l-1,l-2..0]])
+	where 
+		l=length(p)
+peval [] x = 0
 peval (p:[]) x = p
+
+
+pderv :: ArrayPol -> ArrayPol
+pderv p = zipWith (*) (tail p) [l-1,l-2..1]
+	where
+		l=length(p)
 
