@@ -7,6 +7,7 @@ main = do
         print (x)
         print (p2)
         print (peval1)
+        print (pderv1)
         -- print (psuma)
         
         -- print (peval psuma 3)
@@ -23,6 +24,7 @@ main = do
             p2 = coef 3
             p3 = coef 4
             peval1 = peval [(4,3), (3,1), (2,0)] 2
+            pderv1 = pderv [(4,3), (3,1), (2,0)]
             -- lp = [p1,p2,p3]
             -- psuma = (padd lp)
             -- p1p3 = pmulVble p1 4 0

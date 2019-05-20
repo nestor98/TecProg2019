@@ -94,18 +94,14 @@ coef c = [(c,0)]
 
 
 peval :: TuplaPol -> Float -> Float
-peval p x = foldr (+) 0 [ c*x^pot | t <- p, let c = (fst t), let pot = (snd t) ]--(map ((snd p)*) (fst p))
---peval [] x = 0
---peval (p:[]) x = p
--- peval p x = foldr (+) 0 (zipWith (*) p [x^i | i<-[l-1,l-2..0]])
---     where 
---         l=length(p)
--- peval [] x = 0
--- peval (p:[]) x = p
+peval p x = foldr (+) 0 [ c*x^pot | t <- p, let c = (fst t), let pot = (snd t) ]
 
 
--- pderv :: TuplaPol -> TuplaPol
--- pderv p = zipWith (*) (init p) [(l-1),(l-2)..1]
---     where
---         l= fromIntegral (length(p)) ::Float
+pderv :: TuplaPol -> TuplaPol
+pderv p = [ (c*potFloat, pot-1) | t <- p, let c=(fst t), let pot=(snd t), let potFloat = fromIntegral (pot) ::Float, pot > 0 ]
+
+
+    -- zipWith (*) (init p) [(l-1),(l-2)..1]
+    -- where
+    --     l = fromIntegral (length(p)) ::Float
 
