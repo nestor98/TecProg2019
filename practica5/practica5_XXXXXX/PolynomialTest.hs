@@ -4,14 +4,14 @@ import TupleListPolynomial
 main = do
     
 
-        print (x)
+       	print (x)
         print (p2)
         print (peval1)
         print (pderv1)
-        -- print (psuma)
+        print (psuma)
         
-        -- print (peval psuma 3)
-        -- print (pderv psuma)
+        print (peval psuma 3)
+        print (pderv psuma)
         -- print (pmulCte psuma 0)
         -- print (p1p3)
         -- print (pmultip)
@@ -25,8 +25,8 @@ main = do
             p3 = coef 4
             peval1 = peval [(4,3), (3,1), (2,0)] 2
             pderv1 = pderv [(4,3), (3,1), (2,0)]
-            -- lp = [p1,p2,p3]
-            -- psuma = (padd lp)
+            lp = [p1,p2,p3]
+            psuma = (padd lp)
             -- p1p3 = pmulVble p1 4 0
             -- pmultip = pmulVble psuma 4 1
             -- pcuad = pmulTwo pmultip pmultip
