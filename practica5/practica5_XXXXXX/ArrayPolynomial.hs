@@ -1,5 +1,6 @@
 module ArrayPolynomial where
 --import TupleListPolynomial
+import Numeric
 
 type ArrayPol = [Float]
 
@@ -61,10 +62,10 @@ pmulVble _ _ = error("Has llamado mal a pmulVble, melon")
 -- ****************    Por aqui esta el problema, se supone que algo de tipos:   ************************
 -- Devuelve la multiplicacion de dos polinomios   
 pmulTwo :: ArrayPol -> ArrayPol -> ArrayPol
-pmulTwo p1 (x2:[]) = pmulCte p1 x2
-pmulTwo p1 (x2:xs2) = foldr (paddTwo) (pmulVble p1 ([x2]++(take l2 [0..]))) [(pmulTwo p1 xs2)]
+pmulTwo p1 (x2:[]) = pmulCte p1 x2 --error(showFFloat (Just 2) x2 " (ultimo elto del pol 2)")--
+pmulTwo p1 (x2:xs2) = (paddTwo) (pmulVble p1 ([x2]++(take l2 [0..]))) (pmulTwo p1 xs2)
    where 
-       l2 = length xs2-- super ineficiente, recalcula la long cada vez (o sea, <primera long> veces)
+       l2 = (length xs2)-- super ineficiente, recalcula la long cada vez (o sea, <primera long> veces)
 
 
 -- ******************************************************************************************************
