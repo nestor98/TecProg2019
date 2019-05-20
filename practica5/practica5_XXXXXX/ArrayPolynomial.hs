@@ -85,10 +85,10 @@ pmulTwo p1 p2 = pmulTwoRec p1 p2 ((length p2)-1) --(paddTwo) (pmulVble p1 x2 l2)
 
 
 
---pmul :: [ArrayPol] -> ArrayPol
---pmul (x:xs) = foldr (pmulTwo) x xs
---pmul [] = []
---pmul (x:[]) = x
+pmul :: [ArrayPol] -> ArrayPol
+pmul (x:xs) = foldr (pmulTwo) x xs
+pmul [] = []
+pmul (x:[]) = x
 
 
 
