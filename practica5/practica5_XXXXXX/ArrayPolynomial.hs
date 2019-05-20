@@ -46,27 +46,40 @@ padd (x:[]) = x
 --padd (x:(y:[])) = paddTwo x y
 
 
+
+-- quita los ceros a la izquierda de un pol:
+eliminarCeros :: ArrayPol -> ArrayPol
+eliminarCeros (x:[]) = [x]
+eliminarCeros (x:xs) 
+    | x /= 0 = [x] ++ xs
+    | x == 0 = eliminarCeros xs
+
+
 -- multiplica un polinomio por una cte:
 pmulCte :: ArrayPol -> Float -> ArrayPol
-pmulCte p c = map (c*) p 
+pmulCte p c = eliminarCeros (map (c*) p)
 
 
--- multiplica un pol por otro de una sola variable (5x² o 3 por ej)
-pmulVble :: ArrayPol -> ArrayPol -> ArrayPol
-pmulVble p (x:[]) = pmulCte p x
-pmulVble p (x:xs) = pmulCte (p++xs) x
-pmulVble _ _ = error("Has llamado mal a pmulVble, melon")
--- no se si se supone que se hace asi lo de los errores
+-- multiplica un pol por una variable (constante y su grado)
+pmulVble :: ArrayPol -> Float -> Int -> ArrayPol
+pmulVble p x g = pmulCte p x ++ (take g [0..])
+
+
+-- pmulVble p (x:[]) = pmulCte p x
+-- pmulVble p (x:xs) = pmulCte (p++xs) x
+-- pmulVble _ _ = error("Has llamado mal a pmulVble, melon")
+-- -- no se si se supone que se hace asi lo de los errores
+
+pmulTwoRec :: ArrayPol -> ArrayPol -> Int -> ArrayPol
+pmulTwoRec p1 (x2:[]) _ = pmulCte p1 x2 --error(showFFloat (Just 2) x2 " (ultimo elto del pol 2)")--
+pmulTwoRec p1 (x2:xs2) l2 = (paddTwo) (pmulVble p1 x2 l2) (pmulTwoRec p1 xs2 (l2-1))
 
 
 -- ****************    Por aqui esta el problema, se supone que algo de tipos:   ************************
 -- Devuelve la multiplicacion de dos polinomios   
 pmulTwo :: ArrayPol -> ArrayPol -> ArrayPol
-pmulTwo p1 (x2:[]) = pmulCte p1 x2 --error(showFFloat (Just 2) x2 " (ultimo elto del pol 2)")--
-pmulTwo p1 (x2:xs2) = (paddTwo) (pmulVble p1 ([x2]++(take l2 [0..]))) (pmulTwo p1 xs2)
-   where 
-       l2 = (length xs2)-- super ineficiente, recalcula la long cada vez (o sea, <primera long> veces)
-
+pmulTwo p1 p2 = pmulTwoRec p1 p2 ((length p2)-1) --(paddTwo) (pmulVble p1 x2 l2) (pmulTwoRec p1 xs2 l2-1)
+-- pmulTwo p1 (x2:[]) = pmulCte p1 x2 --error(showFFloat (Just 2) x2 " (ultimo elto del pol 2)")--
 
 -- ******************************************************************************************************
 
