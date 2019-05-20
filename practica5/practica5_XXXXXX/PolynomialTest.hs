@@ -13,10 +13,9 @@ main = do
         print (pmulCte psuma 0)
         print (p1p3)
         print (pmultip)
-        print (pcuad)   -- [16.0,224.0,784.0,0.0,1.0]                 [16.0,224.0,784.0,0.0,0.0]
-        print (pcubo)   -- [64.0,1344.0,9408.0,21952.0,4.0,28.0,1.0]  [64.0,1344.0,9408.0,21952.0,0.0,0.0,0.0]
-        print (pcubo2)  -- [64.0,1344.0,9408.0,21952.0,5.0,31.0,6.0]  [64.0,1344.0,9408.0,21952.0,0.0,0.0,0.0]
-                        ------------  DEVUELVE -------------------- || ------ DEBERIA DEVOLVER -------------
+        print (pcuad)   
+        print (pcubo)   
+        print (pcubo2)  
         print (pcubo_pmul)
         where 
             p1 = x
