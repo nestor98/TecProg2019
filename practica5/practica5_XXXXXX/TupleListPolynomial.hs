@@ -98,10 +98,5 @@ peval p x = foldr (+) 0 [ c*x^pot | t <- p, let c = (fst t), let pot = (snd t) ]
 
 
 pderv :: TuplaPol -> TuplaPol
-pderv p = [ (c*potFloat, pot-1) | t <- p, let c=(fst t), let pot=(snd t), let potFloat = fromIntegral (pot) ::Float, pot > 0 ]
-
-
-    -- zipWith (*) (init p) [(l-1),(l-2)..1]
-    -- where
-    --     l = fromIntegral (length(p)) ::Float
-
+pderv p = [ (c*potFloat, pot-1) | t <- p, let c=(fst t), let pot=(snd t), pot > 0, 
+                                  let potFloat = fromIntegral (pot) ::Float ]
