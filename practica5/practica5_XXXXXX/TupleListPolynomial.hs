@@ -21,8 +21,9 @@ coef c = [(c,0)]
 
 
 peval :: TuplaPol -> Float -> Float
-peval p x = foldr (+) 0 [ c*x^pot | t <- p, let c = (fst t), let pot = (snd t) ]
+peval p x = foldr (+) 0 [ c*x^pot | (c, pot) <- p ]
 
 
 pderv :: TuplaPol -> TuplaPol
-pderv p = [ (c*(fromIntegral (pot)), pot-1) | t <- p, let c=(fst t), let pot=(snd t), pot > 0 ]
+pderv p = [ (c*(fromIntegral (pot)), pot-1) | (c, pot) <- p, pot > 0 ]
+--pderv p = [ (c*(fromIntegral (pot)), pot-1) | t <- p, let c=(fst t), let pot=(snd t), pot > 0 ]
