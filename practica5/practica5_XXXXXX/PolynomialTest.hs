@@ -7,18 +7,22 @@ main = do
         print (x)
         print (p2)
         print (psuma)
-        --print (pmulCte psuma 3)
-        --print (pmulVble p1 p3)
-        --print (pmultip)
+        
         print (peval psuma 3)
         print (pderv psuma)
+        print (pmulCte psuma 3)
+        print (p1p3)
+        print (pmultip)
+        print (pcuad)
         where 
             p1 = x
             p2 = coef 3
             p3 = coef 4
             lp = [p1,p2,p3,[]]
             psuma = (padd lp)
-            --pmultip = pmulVble psuma (pmulVble p1 p3)
+            p1p3 = pmulVble p1 p3
+            pmultip = pmulVble psuma p1p3
+            pcuad = pmulTwo pmultip pmultip
 
         -- print p
         -- print (peval p  2.0)
