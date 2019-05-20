@@ -57,12 +57,12 @@ eliminarCeros (x:xs)
 
 -- multiplica un polinomio por una cte:
 pmulCte :: ArrayPol -> Float -> ArrayPol
-pmulCte p c = eliminarCeros (map (c*) p)
+pmulCte p c = (map (c*) p)--eliminarCeros 
 
 
 -- multiplica un pol por una variable (constante y su grado)
 pmulVble :: ArrayPol -> Float -> Int -> ArrayPol
-pmulVble p x g = pmulCte p x ++ (take g [0..])
+pmulVble p x g = pmulCte p x ++ (take g [0,0..])
 
 
 -- pmulVble p (x:[]) = pmulCte p x
