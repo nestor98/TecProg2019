@@ -1,6 +1,6 @@
 module ArrayPolynomial where
 --import TupleListPolynomial
-import Numeric
+--import Numeric
 
 type ArrayPol = [Float]
 
