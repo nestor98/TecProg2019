@@ -1,44 +1,57 @@
-module TupleListPolynomial where
+module BinaryTree where
 --import TupleListPolynomial
+--import Numeric
 
 
-type TuplaPol = [(Float, Int)]
+
+data Tree a = Tree (Tree a) (Tree a) | Leaf a
+
+empty :: Tree
+empty = Tree 
+
+
+
 
 
 -- Esta función devolverá un polinomio que sólo contiene una x (el coeficiente degrado 1 vale 1)
-x :: TuplaPol
-x = [(1,1)] 
+x :: ArrayPol
+x = [1,0] -- suponemos conversion automatica
 
 -- Esta función devolverá un polinomio que   contenga   como 
 -- término independiente la constante c (el coeficiente de grado 0 vale c)
-coef :: Float -> TuplaPol
-coef c = [(c,0)]
+coef :: Float -> ArrayPol
+coef c = [c]
 
 
 
-paddTwo :: TuplaPol -> TuplaPol -> TuplaPol
-paddTwo (x:xs) (y:ys) 
- | l1 > l2 = [x] ++ paddTwo xs (y:ys)
-    | l1 < l2 = [y] ++ paddTwo ys (x:xs)
-    | otherwise = [(c1+c2,l1)] ++ paddTwo ys xs
+-- Devuelve la suma de dos polinomios de igual long
+paddEqual :: ArrayPol -> ArrayPol -> ArrayPol
+paddEqual x y = zipWith (+) x y
+
+
+
+paddTwo :: ArrayPol -> ArrayPol -> ArrayPol
+paddTwo x y
+    | l1 > l2 = (take diffl1l2 x) ++ paddEqual (drop diffl1l2 x) y
+    | l1 < l2 = (take diffl1l2 y) ++ paddEqual (drop diffl1l2 y) x
+    | otherwise = paddEqual x y
     where 
-        l1 = snd x
-        l2 = snd y
-        c1 = fst x
-        c2 = fst y
-paddTwo [] y = y
-paddTwo x [] = x
-paddTwo [] [] = []
+        l1 = length x
+        l2 = length y 
+        diffl1l2 = abs (l1-l2)
 
 
-padd :: [TuplaPol] -> TuplaPol
+
+
+--padd lp  –   Esta   función   suma   todos   
+-- los   polinomios   que   haya   en   la   lista   lp   ydevuelve el resultado
+padd :: [ArrayPol] -> ArrayPol
 padd (x:xs) = foldr (paddTwo) x xs
 -- padd (x:(y:xs)) = foldr (padd) [x] xs
 padd [] = []
---padd (x:[]) = x
-
-
-
+padd (x:[]) = x
+-- aqui quedan solo dos polinomios, x e y:
+--padd (x:(y:[])) = paddTwo x y
 
 
 
@@ -73,9 +86,7 @@ pmulTwoRec p1 (x2:xs2) l2 = (paddTwo) (pmulVble p1 x2 l2) (pmulTwoRec p1 xs2 (l2
 -- ****************    Por aqui esta el problema, se supone que algo de tipos:   ************************
 -- Devuelve la multiplicacion de dos polinomios   
 pmulTwo :: ArrayPol -> ArrayPol -> ArrayPol
-pmulTwo x y = [(c1*c2,l1+l2)|(c1,l1)<-x,(c2,l2)<-y]
-
---pmulTwoRec p1 p2 ((length p2)-1) --(paddTwo) (pmulVble p1 x2 l2) (pmulTwoRec p1 xs2 l2-1)
+pmulTwo p1 p2 = pmulTwoRec p1 p2 ((length p2)-1) --(paddTwo) (pmulVble p1 x2 l2) (pmulTwoRec p1 xs2 l2-1)
 -- pmulTwo p1 (x2:[]) = pmulCte p1 x2 --error(showFFloat (Just 2) x2 " (ultimo elto del pol 2)")--
 
 -- ******************************************************************************************************
@@ -90,18 +101,15 @@ pmul (x:[]) = x
 
 
 
+peval :: ArrayPol -> Float -> Float
+peval p x = foldr (+) 0 (zipWith (*) p [x^i | i<-[l-1,l-2..0]])
+	where 
+		l=length(p)
+peval [] x = 0
+peval (p:[]) x = p
 
 
-
-
-
-
-
-
-peval :: TuplaPol -> Float -> Float
-peval p x = foldr (+) 0 [ c*x^pot | (c, pot) <- p ]
-
-
-pderv :: TuplaPol -> TuplaPol
-pderv p = [ (c*(fromIntegral (pot)), pot-1) | (c, pot) <- p, pot > 0 ]
---pderv p = [ (c*(fromIntegral (pot)), pot-1) | t <- p, let c=(fst t), let pot=(snd t), pot > 0 ]
+pderv :: ArrayPol -> ArrayPol
+pderv p = zipWith (*) (init p) [(l-1),(l-2)..1]
+	where
+		l= fromIntegral (length(p)) ::Float
