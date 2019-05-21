@@ -43,21 +43,21 @@ padd [] = []
 
 
 -- quita los ceros a la izquierda de un pol:
-eliminarCeros :: ArrayPol -> ArrayPol
-eliminarCeros (x:[]) = [x]
-eliminarCeros (x:xs) 
-    | x /= 0 = [x] ++ xs
-    | x == 0 = eliminarCeros xs
+--eliminarCeros :: ArrayPol -> ArrayPol
+--eliminarCeros (x:[]) = [x]
+--eliminarCeros (x:xs) 
+--    | x /= 0 = [x] ++ xs
+--   | x == 0 = eliminarCeros xs
 
 
 -- multiplica un polinomio por una cte:
-pmulCte :: ArrayPol -> Float -> ArrayPol
-pmulCte p c = (map (c*) p)--eliminarCeros 
+--pmulCte :: ArrayPol -> Float -> ArrayPol
+--pmulCte p c = (map (c*) p)--eliminarCeros 
 
 
 -- multiplica un pol por una variable (constante y su grado)
-pmulVble :: ArrayPol -> Float -> Int -> ArrayPol
-pmulVble p x g = pmulCte p x ++ (take g [0,0..])
+--pmulVble :: ArrayPol -> Float -> Int -> ArrayPol
+--pmulVble p x g = pmulCte p x ++ (take g [0,0..])
 
 
 -- pmulVble p (x:[]) = pmulCte p x
@@ -65,15 +65,29 @@ pmulVble p x g = pmulCte p x ++ (take g [0,0..])
 -- pmulVble _ _ = error("Has llamado mal a pmulVble, melon")
 -- -- no se si se supone que se hace asi lo de los errores
 
-pmulTwoRec :: ArrayPol -> ArrayPol -> Int -> ArrayPol
-pmulTwoRec p1 (x2:[]) _ = pmulCte p1 x2 --error(showFFloat (Just 2) x2 " (ultimo elto del pol 2)")--
-pmulTwoRec p1 (x2:xs2) l2 = (paddTwo) (pmulVble p1 x2 l2) (pmulTwoRec p1 xs2 (l2-1))
+--pmulTwoRec :: ArrayPol -> ArrayPol -> Int -> ArrayPol
+--pmulTwoRec p1 (x2:[]) _ = pmulCte p1 x2 --error(showFFloat (Just 2) x2 " (ultimo elto del pol 2)")--
+--pmulTwoRec p1 (x2:xs2) l2 = (paddTwo) (pmulVble p1 x2 l2) (pmulTwoRec p1 xs2 (l2-1))
 
 
 -- ****************    Por aqui esta el problema, se supone que algo de tipos:   ************************
--- Devuelve la multiplicacion de dos polinomios   
-pmulTwo :: ArrayPol -> ArrayPol -> ArrayPol
-pmulTwo x y = [(c1*c2,l1+l2)|(c1,l1)<-x,(c2,l2)<-y]
+-- Devuelve la multiplicacion de dos polinomios  
+
+iguales :: TuplaPol -> TuplaPol
+iguales (x:xs) = [((fst x)+(fst y),snd x) | y<-xs, (snd y)==(snd x)] 
+
+
+
+sort :: TuplaPol -> TuplaPol
+sort (x:xs) = sort [y | y<-xs, (snd y)>(snd x)] ++ (if iq==[] then [x] else iq ) ++ sort [y | y<-xs, (snd y)<(snd x)]
+	where 
+		iq= iguales (x:xs)
+sort [] = []
+sort (x:_) = [x]
+
+ 
+pmulTwo :: TuplaPol -> TuplaPol -> TuplaPol
+pmulTwo x y = sort [(c1*c2,l1+l2)|(c1,l1)<-x,(c2,l2)<-y]
 
 --pmulTwoRec p1 p2 ((length p2)-1) --(paddTwo) (pmulVble p1 x2 l2) (pmulTwoRec p1 xs2 l2-1)
 -- pmulTwo p1 (x2:[]) = pmulCte p1 x2 --error(showFFloat (Just 2) x2 " (ultimo elto del pol 2)")--
@@ -82,7 +96,7 @@ pmulTwo x y = [(c1*c2,l1+l2)|(c1,l1)<-x,(c2,l2)<-y]
 
 
 
-pmul :: [ArrayPol] -> ArrayPol
+pmul :: [TuplaPol] -> TuplaPol
 pmul (x:xs) = foldr (pmulTwo) x xs
 pmul [] = []
 pmul (x:[]) = x

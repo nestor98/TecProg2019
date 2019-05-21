@@ -12,6 +12,7 @@ main = do
         
         print (peval psuma 3)
         print (pderv psuma)
+        print (pmul [psuma,psuma,psuma])
         -- print (pmulCte psuma 0)
         -- print (p1p3)
         -- print (pmultip)
