@@ -19,4 +19,4 @@ main = do
     -- print $ inorder $ foldl add empty ["Juan", "Pedro", "Adolfo", "Diego"]
 
 
-    print (add "ZZ" testTree)
+    print (add testTree "ZZ")

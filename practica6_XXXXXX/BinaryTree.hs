@@ -51,11 +51,11 @@ inorder (Tree x lb rb) = inorder lb ++ [x] ++ inorder rb
 add :: (Ord a) => BinTree a -> a -> BinTree a
 add (Leaf t) x
     | x > t     = (Tree t Nill (Leaf x))
-    | otherwise = (Tree x t Nill)
+    | otherwise = (Tree x (Leaf t) Nill)
 add (Nill) x = Leaf x
 add (Tree r i d) x 
-    | x > r = add d x
-    | otherwise = add i x
+    | x > r = (Tree r i (add d x))
+    | otherwise = (Tree r (add i x) d)
 
 
 -- between :: (Ord a) => BinTree a -> a -> a
