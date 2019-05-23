@@ -4,12 +4,17 @@ module BinaryTree where
 
 
 
-data Tree a = Tree a (Tree a) (Tree a) | Leaf a | Nill
-  deriving Show
+data BinTree a = Tree a (BinTree a) (BinTree a) | Leaf a | Nill 
 
---empty :: Tree
-empty = Tree 
 
+empty :: BinTree a
+empty = Nill
+
+
+instance (Show a) => Show (BinTree a) where 
+    show (Tree r i d) = (show r) ++ "(" ++ (show i) ++ "," ++ (show d) ++ ")"
+    show (Leaf a) = show a
+    show Nill = ""
 -- Preguntar
 --show :: Tree -> String
 --show a =
@@ -19,6 +24,44 @@ leaf x = Leaf x
 tree x lb rb = Tree x lb rb
 
 
-preorder :: (Ord a) => Tree a -> [a]
-preorden Nill = []
-preorden (x lb rb) = [x] ++ preorder lb ++ preorder rb
+size :: BinTree a -> Int
+size (Leaf a) = 1
+size (Nill) = 0
+size (Tree r i d) = 1 + size i + size d
+
+
+
+preorder :: BinTree a -> [a]
+preorder (Leaf x) = [x]
+preorder (Nill) = []
+preorder (Tree x lb rb) = [x] ++ preorder lb ++ preorder rb
+
+
+postorder :: BinTree a -> [a]
+postorder (Leaf x) = [x]
+postorder (Nill) = []
+postorder (Tree x lb rb) = postorder lb ++ postorder rb ++ [x]
+
+inorder :: BinTree a -> [a]
+inorder (Leaf x) = [x]
+inorder (Nill) = []
+inorder (Tree x lb rb) = inorder lb ++ [x] ++ inorder rb 
+
+
+add :: (Ord a) => BinTree a -> a -> BinTree a
+add (Leaf t) x
+    | x > t     = (Tree t Nill (Leaf x))
+    | otherwise = (Tree x t Nill)
+add (Nill) x = Leaf x
+add (Tree r i d) x 
+    | x > r = add d x
+    | otherwise = add i x
+
+
+-- between :: (Ord a) => BinTree a -> a -> a
+-- between (Leaf t) xmin xmax =
+
+-- between (Tree r i d) xmin xmax 
+--     | r < xmin = between d xmin xmax
+--     | r > xmax = between i xmin xmax
+--     | r == xmin = 
