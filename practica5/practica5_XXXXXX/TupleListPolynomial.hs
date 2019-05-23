@@ -28,14 +28,11 @@ paddTwo (x:xs) (y:ys)
         c2 = fst y
 paddTwo [] y = y
 paddTwo x [] = x
-paddTwo [] [] = []
 
 
 padd :: [TuplaPol] -> TuplaPol
 padd (x:xs) = foldr (paddTwo) x xs
--- padd (x:(y:xs)) = foldr (padd) [x] xs
 padd [] = []
---padd (x:[]) = x
 
 
 iguales :: TuplaPol -> TuplaPol
@@ -44,10 +41,9 @@ iguales (x:xs) = [((fst x)+(fst y),snd x) | y<-xs, (snd y)==(snd x)]
 
 sort :: TuplaPol -> TuplaPol
 sort (x:xs) = sort [y | y<-xs, (snd y)>(snd x)] ++ (if iq==[] then [x] else iq ) ++ sort [y | y<-xs, (snd y)<(snd x)]
-	where 
-		iq= iguales (x:xs)
+    where 
+        iq= iguales (x:xs)
 sort [] = []
-sort (x:_) = [x]
 
  
 pmulTwo :: TuplaPol -> TuplaPol -> TuplaPol
@@ -57,7 +53,6 @@ pmulTwo x y = sort [(c1*c2,l1+l2)|(c1,l1)<-x,(c2,l2)<-y]
 pmul :: [TuplaPol] -> TuplaPol
 pmul (x:xs) = foldr (pmulTwo) x xs
 pmul [] = []
-pmul (x:[]) = x
 
 
 peval :: TuplaPol -> Float -> Float
@@ -66,4 +61,3 @@ peval p x = foldr (+) 0 [ c*x^pot | (c, pot) <- p ]
 
 pderv :: TuplaPol -> TuplaPol
 pderv p = [ (c*(fromIntegral (pot)), pot-1) | (c, pot) <- p, pot > 0 ]
---pderv p = [ (c*(fromIntegral (pot)), pot-1) | t <- p, let c=(fst t), let pot=(snd t), pot > 0 ]
