@@ -60,7 +60,7 @@ add (Tree r i d) x
 
 
 -- devuelve la lista de elementos del arbol 1er param
--- con valor minimo segundo param (hacia la derecha)
+-- con valor maximo el del segundo param (hacia la derecha)
 busqDcha :: (Ord a) => BinTree a -> a  -> [a] 
 busqDcha (Nill) x  = []
 busqDcha (Tree r i d) x  
