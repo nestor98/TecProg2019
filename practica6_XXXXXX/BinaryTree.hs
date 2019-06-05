@@ -59,18 +59,33 @@ add (Tree r i d) x
 
 
 
+-- devuelve la lista de elementos del arbol 1er param
+-- con valor minimo segundo param (hacia la derecha)
+busqDcha :: (Ord a) => BinTree a -> a  -> [a] 
+busqDcha (Nill) x  = []
+busqDcha (Tree r i d) x  
+	| x<=r = x:[]
+	| x>r = r:(busqDcha d x  )
+busqDcha (Leaf a) x = x:[a]
 
-busq :: (Ord a) => BinTree a -> a  -> [a] 
-busq (Nill) x  = []
-busq (Tree r i d) x  
-	| x==r = x:[]
-	| x<r = r:(busq i x  )
-	| x>r = r:(busq d x  )
+
+-- devuelve la lista de elementos del arbol 1er param
+-- con valor maximo segundo param (hacia la izq)
+busqIzq :: (Ord a) => BinTree a -> a  -> [a] 
+busqIzq (Nill) x  = []
+busqIzq (Tree r i d) x  
+    | x>=r = x:[]
+    | x<r = r:(busqIzq i x  )
+busqIzq (Leaf a) x = x:[a]
 
 between :: (Ord a) => BinTree a -> a -> a -> [a]
 between (Tree r i d) xmin xmax 
-     | r < xmin = between d xmin xmax
-     | r > xmax = between i xmin xmax
-     | r == xmin = (busq (Tree r i d) xmax)
-     | r == xmax = (busq (Tree r i d) xmin) 
+    | r < xmin = between d xmin xmax
+    | r > xmax = between i xmin xmax
+    | r >= xmin = (busqDcha (Tree r i d) xmax)-- se evaluan despues (else if...)
+    | r <= xmax = (busqIzq (Tree r i d) xmin) 
+    | otherwise = [] -- xmin > xmax por ej
+between (Leaf x) xmin xmax
+    | x >= xmin && x<=xmax = [x]
+    | otherwise = []
 between (Nill) xmin xmax = []

@@ -18,6 +18,9 @@ main = do
     print $ between (foldl add empty [3, 2, 2, 5, 1, 4, 4]) 2 4
     print $ inorder $ foldl add empty ["Juan", "Pedro", "Adolfo", "Diego"]
     print $ between (foldl add empty [1, 2, 3, 4, 5, 6, 7,8,9,10,100,200]) 2 25
+    print $ between (foldl add empty [1, 2, 3, 4, 5, 6, 7,8,9,10,100,200]) 11 100
+    print $ between (foldl add empty [15]) 11 100
+    print $ between (foldl add empty [1, 2, 3, 4, 5, 6, 7,8,9,10,100,200]) 201 100
     print $ (foldl add empty [3, 2, 2, 5, 1, 4, 4])
 
     print (add testTree "ZZ")
