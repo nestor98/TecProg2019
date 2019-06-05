@@ -58,10 +58,19 @@ add (Tree r i d) x
     | otherwise = (Tree r (add i x) d)
 
 
--- between :: (Ord a) => BinTree a -> a -> a
--- between (Leaf t) xmin xmax =
 
--- between (Tree r i d) xmin xmax 
---     | r < xmin = between d xmin xmax
---     | r > xmax = between i xmin xmax
---     | r == xmin = 
+
+busq :: (Ord a) => BinTree a -> a  -> [a] 
+busq (Nill) x  = []
+busq (Tree r i d) x  
+	| x==r = x:[]
+	| x<r = r:(busq i x  )
+	| x>r = r:(busq d x  )
+
+between :: (Ord a) => BinTree a -> a -> a -> [a]
+between (Tree r i d) xmin xmax 
+     | r < xmin = between d xmin xmax
+     | r > xmax = between i xmin xmax
+     | r == xmin = (busq (Tree r i d) xmax)
+     | r == xmax = (busq (Tree r i d) xmin) 
+between (Nill) xmin xmax = []
