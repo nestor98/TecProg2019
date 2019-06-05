@@ -66,8 +66,9 @@ busqDcha (Nill) x  = []
 busqDcha (Tree r i d) x  
 	| x<r = []
 	| x>=r = r:(busqDcha d x  )
-busqDcha (Leaf a) x = [a]
-
+busqDcha (Leaf a) x 
+    | x<a = []
+    | x>=a = [a]
 
 -- devuelve la lista de elementos del arbol 1er param
 -- con valor maximo segundo param (hacia la izq)
